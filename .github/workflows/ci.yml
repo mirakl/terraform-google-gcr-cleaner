@@ -28,9 +28,9 @@ jobs:
       - name: "Install pre-commit tools: terraform-docs, tflint & tfsec"
         run: |
           mkdir -p $TF_PLUGIN_CACHE_DIR
-          GO111MODULE="on" go get github.com/terraform-docs/terraform-docs
+          GO111MODULE="on" go get -u github.com/terraform-docs/terraform-docs
           sudo mv $(go env GOPATH)/bin/terraform-docs /usr/local/bin/terraform-docs
-          curl -sLf "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip
+          curl -sSLf "$(curl -sS https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip
           unzip tflint.zip && rm tflint.zip
           sudo mv tflint /usr/local/bin/
           go get -u github.com/tfsec/tfsec/cmd/tfsec
