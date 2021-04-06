@@ -42,9 +42,9 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.14.9
-      - name: Run terraform init on examples folders
+      - name: Run terraform init on root & examples folders
         run: |
-          for DIR in $(find ./examples -type d); do
+          for DIR in . $(find ./examples -type d); do
             pushd $DIR
             terraform init
             popd
