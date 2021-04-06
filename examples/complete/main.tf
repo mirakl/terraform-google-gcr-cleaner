@@ -5,7 +5,6 @@ module "gcr_cleaner" {
   # create_app_engine_app = false
   # app_engine_application_location = "europe-west3"
 
-  google_project_id             = var.google_project_id
   cloud_run_service_name        = "gcr-cleaner-helsinki"
   cloud_run_service_location    = "europe-north1"
   gcr_cleaner_image             = "europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner"

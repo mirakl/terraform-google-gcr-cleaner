@@ -1,8 +1,3 @@
-variable "google_project_id" {
-  description = "The project ID to create resources under."
-  type        = string
-}
-
 variable "disable_dependent_services" {
   description = "If `true`, services that are enabled and which depend on this service should also be disabled when this service is destroyed. If `false` or unset, an error will be generated if any enabled services depend on this service when destroying it."
   type        = bool

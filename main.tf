@@ -38,7 +38,7 @@ resource "google_cloud_run_service" "this" {
 resource "google_app_engine_application" "this" {
   count = var.create_app_engine_app ? 1 : 0
 
-  project     = var.google_project_id
+  project     = local.google_project_id
   location_id = var.app_engine_application_location
 
   depends_on = [google_project_service.this]
