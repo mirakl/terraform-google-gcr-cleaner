@@ -1,10 +1,11 @@
 terraform {
-  required_version = ">= 0.14.4"
+  required_version = ">= 0.14.9"
+  experiments      = [module_variable_optional_attrs]
 
   required_providers {
-    null = {
-      source  = "hashicorp/null"
-      version = ">= 3.0.0"
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 3.62.0"
     }
   }
 }

@@ -2,7 +2,7 @@ style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
-  repository_url: https://github.com/mirakl/terraform-module-template
+  repository_url: https://github.com/mirakl/terraform-gcr-cleaner
 options:
   commits:
     sort_by: Type
