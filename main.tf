@@ -57,7 +57,10 @@ resource "google_cloud_scheduler_job" "this" {
   schedule    = var.cloud_scheduler_job_schedule
   time_zone   = var.cloud_scheduler_job_time_zone
   # Location must equal to the one of the App Engine app that is associated with this project
-  region = var.app_engine_application_location
+  # /!\ Note that two locations, called europe-west and us-central in App Engine commands, 
+  # are called, respectively, europe-west1 and us-central1 in Cloud Scheduler commands.
+  # More on https://cloud.google.com/appengine/docs/locations
+  region = contains(["europe-west", "us-central"], var.app_engine_application_location) == true ? "${var.app_engine_application_location}1" : var.app_engine_application_location
 
   retry_config {
     retry_count = 1
