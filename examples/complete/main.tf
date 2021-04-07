@@ -1,10 +1,10 @@
 module "gcr_cleaner" {
   source = "../.."
 
-  # for existing App Engine Application, uncomment the following
-  # create_app_engine_app = false
-  # app_engine_application_location = "europe-west3"
+  # If you want to create your App Engine Application using terraform, uncomment the following
+  # create_app_engine_app = true
 
+  app_engine_application_location = "europe-west3"
   cloud_run_service_name        = "gcr-cleaner-helsinki"
   cloud_run_service_location    = "europe-north1"
   gcr_cleaner_image             = "europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner"

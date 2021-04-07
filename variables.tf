@@ -25,7 +25,7 @@ variable "cloud_run_service_location" {
 variable "create_app_engine_app" {
   description = "Whether to create an App Engine application."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "app_engine_application_location" {

@@ -31,9 +31,9 @@ resource "google_cloud_run_service" "this" {
 # terraform import google_app_engine_application.this your-project-id
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/app_engine_application
 # 
-# /!\ If you already have an existing app engine app, just set `create_app_engine_app` variable to false
+# /!\ If you want to create your app engine app using terraform, just set `create_app_engine_app` variable to true
 # and provide the app engine app location:
-# create_app_engine_app           = false
+# create_app_engine_app           = true
 # app_engine_application_location = "us-central1"
 resource "google_app_engine_application" "this" {
   count = var.create_app_engine_app ? 1 : 0
