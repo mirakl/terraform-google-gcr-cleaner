@@ -3,12 +3,11 @@
 Terraform module that implements [gcr-cleaner](https://github.com/sethvargo/gcr-cleaner), a tool that deletes untagged images in [Google Cloud Container Registry](https://cloud.google.com/container-registry).
 
 ## Usage
-
+Cleaning `test/nginx`, `test/db/mariadb` repositories from current project (the provider project ) and `test/os/centos` from `another-project-id` project:
 ```hcl
 module "gcr_cleaner" {
   source = "github.com/mirakl/terraform-gcr-cleaner?ref=v0.1.0"
 
-  create_app_engine_app = false
   app_engine_application_location = "europe-west3"
   gcr_repositories = [
     {
@@ -27,6 +26,22 @@ module "gcr_cleaner" {
   ]
 }
 ```
+Cleaning all repositories from `yet-another-project-id` project:
+```hcl
+module "gcr_cleaner" {
+  source = "github.com/mirakl/terraform-gcr-cleaner?ref=v0.2.0"
+
+  app_engine_application_location = "us-central"
+  gcr_repositories = [
+    {
+      project_id     = "yet-another-project-id"
+      clean_all      = true
+    }
+  ]
+}
+```
+
+> To fetch all repositories for a given project, this module is using an [external data source](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/data_source) running a [local script](scripts/../CHANGELOG.mdget_all_repositories.sh) that build the list of repositories with the help of [gcloud](https://cloud.google.com/sdk/gcloud/) and [jq](https://stedolan.github.io/jq/) commands.
 
 ## Examples
 
@@ -43,12 +58,14 @@ This version of the module implements just `repo` parameter of the `gcr-cleaner`
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.9 |
+| <a name="requirement_external"></a> [external](#requirement\_external) | >= 2.1.0 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.62.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
+| <a name="provider_external"></a> [external](#provider\_external) | >= 2.1.0 |
 | <a name="provider_google"></a> [google](#provider\_google) | >= 3.62.0 |
 
 ## Modules
@@ -67,6 +84,7 @@ No modules.
 | [google_service_account.cleaner](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_service_account.invoker](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_storage_bucket_access_control.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_access_control) | resource |
+| [external_external.this](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [google_project.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/project) | data source |
 
 ## Inputs
@@ -82,7 +100,7 @@ No modules.
 | <a name="input_disable_dependent_services"></a> [disable\_dependent\_services](#input\_disable\_dependent\_services) | If `true`, services that are enabled and which depend on this service should also be disabled when this service is destroyed. If `false` or unset, an error will be generated if any enabled services depend on this service when destroying it. | `bool` | `false` | no |
 | <a name="input_disable_on_destroy"></a> [disable\_on\_destroy](#input\_disable\_on\_destroy) | If `true`, disable the service when the terraform resource is destroyed. May be useful in the event that a project is long-lived but the infrastructure running in that project changes frequently. | `bool` | `false` | no |
 | <a name="input_gcr_cleaner_image"></a> [gcr\_cleaner\_image](#input\_gcr\_cleaner\_image) | The docker image of the gcr cleaner to deploy to Cloud Run. | `string` | `"gcr.io/gcr-cleaner/gcr-cleaner"` | no |
-| <a name="input_gcr_repositories"></a> [gcr\_repositories](#input\_gcr\_repositories) | List of Google Container Registries objects. | <pre>list(object({<br>    # google project id, if ommited, it will be assigned `google_project_id` variable value<br>    project_id = optional(string)<br>    # location of the storage bucket<br>    storage_region = optional(string)<br>    # docker image repositories<br>    repositories = list(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_gcr_repositories"></a> [gcr\_repositories](#input\_gcr\_repositories) | List of Google Container Registries objects. | <pre>list(object({<br>    # google project id, if ommited, it will be assigned `google_project_id` variable value<br>    project_id = optional(string)<br>    # location of the storage bucket<br>    storage_region = optional(string)<br>    # docker image repositories to clean<br>    repositories = optional(list(string))<br>    # or clean all project's repositories<br>    clean_all = optional(bool)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

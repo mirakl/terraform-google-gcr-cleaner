@@ -47,7 +47,7 @@ resource "google_app_engine_application" "this" {
 # 2. Cloud Scheduler job that triggers an action via HTTP
 resource "google_cloud_scheduler_job" "this" {
   for_each = {
-    for repo in local.repositories : repo => repo
+    for repo in concat(local.fetched_repositories, local.repositories) : repo => repo
   }
 
   # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
