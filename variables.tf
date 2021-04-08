@@ -63,7 +63,7 @@ variable "gcr_repositories" {
       if(lookup(repo, "repositories", null) != null && lookup(repo, "clean_all", null) != null) ||
       (lookup(repo, "repositories", null) == null && lookup(repo, "clean_all", null) == null)
     ]) == 0 : true
-    error_message = "One of the repositories in the list doesn't match the requirements. You have to provide repositories or clean_all, not both at the time or not none of them."
+    error_message = "One of the repositories in the list doesn't match the requirements. You have to provide repositories or clean_all, not both at the same time or none of them."
   }
 }
 
