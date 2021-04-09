@@ -18,6 +18,11 @@ module "gcr_cleaner" {
       ]
     },
     {
+      storage_region = "eu"
+      project_id     = "yet-another-project-id"
+      clean_all      = true
+    },
+    {
       project_id = "another-project-id"
       repositories = [
         "test/image",

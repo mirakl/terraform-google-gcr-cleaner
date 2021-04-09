@@ -51,10 +51,20 @@ variable "gcr_repositories" {
     project_id = optional(string)
     # location of the storage bucket
     storage_region = optional(string)
-    # docker image repositories
-    repositories = list(string)
+    # docker image repositories to clean
+    repositories = optional(list(string))
+    # or clean all project's repositories
+    clean_all = optional(bool)
   }))
   default = []
+  validation {
+    condition = length(var.gcr_repositories) > 0 ? length([
+      for repo in var.gcr_repositories : repo
+      if(lookup(repo, "repositories", null) != null && lookup(repo, "clean_all", null) != null) ||
+      (lookup(repo, "repositories", null) == null && lookup(repo, "clean_all", null) == null)
+    ]) == 0 : true
+    error_message = "One of the repositories in the list doesn't match the requirements. You have to provide repositories or clean_all, not both at the same time or none of them."
+  }
 }
 
 variable "cloud_scheduler_job_schedule" {
