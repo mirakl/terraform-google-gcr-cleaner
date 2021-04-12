@@ -17,9 +17,21 @@ variable "cloud_run_service_name" {
 }
 
 variable "cloud_run_service_location" {
-  description = "The location of the cloud run instance. Make sure to provide a valid location. More at https://cloud.google.com/run/docs/locations"
+  description = "The location of the cloud run instance. Make sure to provide a valid location. More at https://cloud.google.com/run/docs/locations."
   type        = string
   default     = "europe-west1"
+}
+
+variable "cloud_run_service_maximum_instances" {
+  description = "The number of maximum instances to set for this revision. This value will be used in the `autoscaling.knative.dev/maxScale` annotation key."
+  type        = number
+  default     = 100
+}
+
+variable "cloud_run_service_timeout_seconds" {
+  description = "TimeoutSeconds holds the max duration the instance is allowed for responding to a request."
+  type        = number
+  default     = 60
 }
 
 variable "create_app_engine_app" {
@@ -78,4 +90,20 @@ variable "cloud_scheduler_job_time_zone" {
   description = "Specifies the time zone to be used in interpreting schedule. The value of this field must be a time zone name from the tz database. More on https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
   type        = string
   default     = "Europe/Brussels"
+}
+
+variable "cloud_scheduler_job_attempt_deadline" {
+  description = "The deadline for job attempts in seconds. If the request handler does not respond by this deadline then the request is cancelled and the attempt is marked as a `DEADLINE_EXCEEDED` failure. The failed attempt can be viewed in execution logs. Cloud Scheduler will retry the job according to the `RetryConfig`. Value must be between 15 seconds and 24 hours"
+  type        = number
+  default     = 320
+  validation {
+    condition     = var.cloud_scheduler_job_attempt_deadline >= 15 && var.cloud_scheduler_job_attempt_deadline <= 86400
+    error_message = "Value must be between 15 seconds and 24 hours."
+  }
+}
+
+variable "cloud_scheduler_job_retry_count" {
+  description = "The number of attempts that the system will make to run a job using the exponential backoff procedure described by maxDoublings. Values greater than 5 and negative values are not allowed."
+  type        = number
+  default     = 1
 }

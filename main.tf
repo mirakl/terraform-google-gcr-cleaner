@@ -5,12 +5,19 @@ resource "google_cloud_run_service" "this" {
   location = var.cloud_run_service_location
 
   template {
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/maxScale" = var.cloud_run_service_maximum_instances
+        "run.googleapis.com/client-name"   = "cloud-scheduler"
+      }
+    }
+
     spec {
       containers {
         image = var.gcr_cleaner_image
       }
       service_account_name = google_service_account.cleaner.email
-      timeout_seconds      = 60
+      timeout_seconds      = var.cloud_run_service_timeout_seconds
     }
   }
 
@@ -52,10 +59,11 @@ resource "google_cloud_scheduler_job" "this" {
 
   # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
   # and be no more than 500 characters.
-  name        = "gcr-cleaner_${replace(each.value, "/[.\\/]/", "_")}"
-  description = "Cleanup ${each.value}"
-  schedule    = var.cloud_scheduler_job_schedule
-  time_zone   = var.cloud_scheduler_job_time_zone
+  name             = "gcr-cleaner_${replace(each.value, "/[.\\/]/", "_")}"
+  description      = "Cleanup ${each.value}"
+  schedule         = var.cloud_scheduler_job_schedule
+  time_zone        = var.cloud_scheduler_job_time_zone
+  attempt_deadline = "${var.cloud_scheduler_job_attempt_deadline}s"
   # Location must equal to the one of the App Engine app that is associated with this project
   # /!\ Note that two locations, called europe-west and us-central in App Engine commands, 
   # are called, respectively, europe-west1 and us-central1 in Cloud Scheduler commands.
@@ -63,7 +71,7 @@ resource "google_cloud_scheduler_job" "this" {
   region = contains(["europe-west", "us-central"], var.app_engine_application_location) == true ? "${var.app_engine_application_location}1" : var.app_engine_application_location
 
   retry_config {
-    retry_count = 1
+    retry_count = var.cloud_scheduler_job_retry_count
   }
 
   http_target {
