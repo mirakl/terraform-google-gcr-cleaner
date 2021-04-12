@@ -11,9 +11,6 @@ output "app_engine_application_name" {
 output "cloud_scheduler_jobs" {
   description = "List of the created scheduler jobs."
   value = [
-    for job in google_cloud_scheduler_job.this : {
-      id : job.id
-      name : job.name
-    }
+    for job in google_cloud_scheduler_job.this : job.id
   ]
 }
