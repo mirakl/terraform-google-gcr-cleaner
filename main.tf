@@ -71,7 +71,11 @@ resource "google_cloud_scheduler_job" "this" {
   region = contains(["europe-west", "us-central"], var.app_engine_application_location) == true ? "${var.app_engine_application_location}1" : var.app_engine_application_location
 
   retry_config {
-    retry_count = var.cloud_scheduler_job_retry_count
+    retry_count          = var.cloud_scheduler_job_retry_count
+    min_backoff_duration = "${var.cloud_scheduler_job_min_backoff_duration}s"
+    max_backoff_duration = "${var.cloud_scheduler_job_max_backoff_duration}s"
+    max_retry_duration   = "${var.cloud_scheduler_job_max_retry_duration}s"
+    max_doublings        = var.cloud_scheduler_job_max_doublings
   }
 
   http_target {
