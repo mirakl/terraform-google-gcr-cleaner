@@ -10,6 +10,12 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+<a name="v0.3.0"></a>
+## [v0.3.0] - 2021-04-12
+Enhancements:
+- Use configurable resources ([#5](https://github.com/mirakl/terraform-gcr-cleaner/issues/5))
+
+
 <a name="v0.2.0"></a>
 ## [v0.2.0] - 2021-04-09
 Features:
@@ -22,5 +28,6 @@ Features:
 - First Implementation of GCR Cleaner ([#1](https://github.com/mirakl/terraform-gcr-cleaner/issues/1))
 
 
-[Unreleased]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.3.0...HEAD
+[v0.3.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.1.0...v0.2.0
