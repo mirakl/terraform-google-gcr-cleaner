@@ -107,3 +107,27 @@ variable "cloud_scheduler_job_retry_count" {
   type        = number
   default     = 1
 }
+
+variable "cloud_scheduler_job_min_backoff_duration" {
+  description = "The minimum amount of time to wait before retrying a job after it fails. A duration in seconds with up to nine fractional digits."
+  type        = number
+  default     = 5
+}
+
+variable "cloud_scheduler_job_max_backoff_duration" {
+  description = "The maximum amount of time to wait before retrying a job after it fails. A duration in seconds with up to nine fractional digits."
+  type        = number
+  default     = 3600
+}
+
+variable "cloud_scheduler_job_max_retry_duration" {
+  description = "The time limit for retrying a failed job, measured from time when an execution was first attempted. If specified with retryCount, the job will be retried until both limits are reached. A duration in seconds with up to nine fractional digits."
+  type        = number
+  default     = 0
+}
+
+variable "cloud_scheduler_job_max_doublings" {
+  description = "The time between retries will double maxDoublings times. A job's retry interval starts at minBackoffDuration, then doubles maxDoublings times, then increases linearly, and finally retries retries at intervals of maxBackoffDuration up to retryCount times."
+  type        = number
+  default     = 5
+}
