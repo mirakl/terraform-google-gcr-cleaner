@@ -83,7 +83,7 @@ resource "google_cloud_scheduler_job" "this" {
     uri         = "${google_cloud_run_service.this.status[0].url}/http"
     # TODO implement all payload parameters
     # https://github.com/sethvargo/gcr-cleaner#payload--parameters
-    body = base64encode(jsonencode(map("repo", each.value)))
+    body = base64encode(jsonencode(tomap({ "repo" = each.value })))
     oidc_token {
       service_account_email = google_service_account.invoker.email
     }
