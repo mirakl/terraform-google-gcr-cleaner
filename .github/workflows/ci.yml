@@ -41,7 +41,7 @@ jobs:
           sudo mv $(go env GOPATH)/bin/tfsec /usr/local/bin/tfsec
       - uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.14.9
+          terraform_version: 0.15.1
       - name: Run terraform init on root & examples folders
         run: |
           for DIR in . $(find ./examples -type d); do
