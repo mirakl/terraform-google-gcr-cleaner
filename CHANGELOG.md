@@ -16,7 +16,7 @@ Continous Integration:
 - Trigger the workflow only on push to main branch ([#10](https://github.com/mirakl/terraform-gcr-cleaner/issues/10))
 
 Code Refactoring:
-- Upgrade to use terraform 15 ([#9](https://github.com/mirakl/terraform-gcr-cleaner/issues/9))
+- Upgrade to use terraform 0.15 ([#9](https://github.com/mirakl/terraform-gcr-cleaner/issues/9))
 
 
 <a name="v0.4.0"></a>
