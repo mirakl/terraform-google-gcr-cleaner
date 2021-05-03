@@ -1,4 +1,4 @@
-# terraform-gcr-cleaner
+# terraform-google-gcr-cleaner
 
 Terraform module that implements [gcr-cleaner](https://github.com/sethvargo/gcr-cleaner), a tool that deletes untagged images in [Google Cloud Container Registry](https://cloud.google.com/container-registry).
 
@@ -12,7 +12,8 @@ Please install:
 Cleaning `test/nginx`, `test/db/mariadb` repositories from current project (the provider project ) and `test/os/centos` from `another-project-id` project:
 ```hcl
 module "gcr_cleaner" {
-  source = "github.com/mirakl/terraform-gcr-cleaner?ref=v0.1.0"
+  source  = "mirakl/gcr-cleaner/google"
+  version = "0.5.0"
 
   app_engine_application_location = "europe-west3"
   gcr_repositories = [
@@ -35,7 +36,8 @@ module "gcr_cleaner" {
 Cleaning all repositories from `yet-another-project-id` project:
 ```hcl
 module "gcr_cleaner" {
-  source = "github.com/mirakl/terraform-gcr-cleaner?ref=v0.2.0"
+  source  = "mirakl/gcr-cleaner/google"
+  version = "0.5.0"
 
   app_engine_application_location = "us-central"
   gcr_repositories = [
