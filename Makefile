@@ -13,10 +13,10 @@ push-release-branch:
 	git push --set-upstream origin release/$(NEXT_TAG)
 
 commit-changelog:
-	git commit CHANGELOG.md -m "Update CHANGELOG"
+	git commit CHANGELOG.md -m "Update CHANGELOG for release/$(NEXT_TAG)"
 
 changelog:
-	git-chglog -o CHANGELOG.md --next-tag $(NEXT_TAG)
+	docker run -v $(CURDIR):/workdir quay.io/git-chglog/git-chglog -o CHANGELOG.md --next-tag $(NEXT_TAG)
 
 checkout-release-branch:
 	git checkout -b release/$(NEXT_TAG)
