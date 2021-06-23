@@ -22,18 +22,28 @@ module "gcr_cleaner" {
     {
       storage_region = "eu"
       repositories = [
-        "test/nginx",
+        {
+          repo = "test/nginx"
+        }
       ]
     },
     {
       storage_region = "eu"
       project_id     = "yet-another-project-id"
       clean_all      = true
+      parameters = {
+        grace = "730s"
+      }
     },
     {
       project_id = "another-project-id"
       repositories = [
-        "test/image",
+        {
+          repo = "test/image"
+          grace = "3h"
+          allow_tagged = true
+          keep = 10
+        }
       ]
     }
   ]

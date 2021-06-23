@@ -6,7 +6,9 @@ module "gcr_cleaner" {
     {
       storage_region = "eu"
       repositories = [
-        "test/nginx",
+        {
+          repo = "test/nginx"
+        }
       ]
     }
   ]
