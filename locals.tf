@@ -21,14 +21,26 @@ locals {
   # for projects having explicit repositories definition
   repositories = flatten([
     for gcr in var.gcr_repositories : [
-      for repo in gcr.repositories : gcr.storage_region != null ? "${gcr.storage_region}.gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo}" : "gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo}"
+      for repo in gcr.repositories : gcr.storage_region != null
+        ? merge({
+          repo = "${gcr.storage_region}.gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}" },
+          repo
+        )
+        : merge({
+          repo = "gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}" },
+          repo
+        )
     ] if gcr.repositories != null
   ])
 
   # merge all fetched repositories with external data in one list
   fetched_repositories = flatten([
     for data in data.external.this : [
-      for repo in jsondecode(data.result.repositories) : repo
+      for repo in jsondecode(data.result.repositories) : merge({ "repo": repo.name }, local.options[repo.project_id])
     ]
   ])
+
+  options = {
+    for gcr in var.gcr_repositories : (gcr.project_id != null ? gcr.project_id : local.google_project_id) => gcr.parameters
+  }
 }

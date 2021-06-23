@@ -16,7 +16,7 @@ function get_gcr_repositories() {
     local repositories=""
     while read -r nested_repository; do
         if [ "$(gcloud container images list --repository "$nested_repository" --format json | jq length)" -eq 0 ]; then
-            repositories+="{\"name\":\"${nested_repository}\"},"
+            repositories+="{\"name\":\"${nested_repository}\", \"project_id\": \"${GOOGLE_PROJECT_ID}\" },"
         else
             get_gcr_repositories "$nested_repository"
         fi
@@ -31,7 +31,7 @@ repo_names="$(get_gcr_repositories "${GCR_HOST_NAME}"/"${GOOGLE_PROJECT_ID}")"
 # "gcr.io/my-project/nested/repository",
 # "gcr.io/my-project/another/nested/repository"
 # ]
-REPOSITORIES=$(echo "[${repo_names%%,}]" | jq '.|map(.name)')
+REPOSITORIES=$(echo "[${repo_names%%,}]" | jq 'map(. + { "project_id": .project_id })')
 
 # Safely produce a JSON object containing the result value.
 # jq will ensure that the value is properly quoted

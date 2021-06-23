@@ -64,9 +64,22 @@ variable "gcr_repositories" {
     # location of the storage bucket
     storage_region = optional(string)
     # docker image repositories to clean
-    repositories = optional(list(string))
+    repositories = optional(list(object({
+      repo = string
+      grace = optional(string)
+      allow_tagged = optional(bool)
+      keep = optional(string)
+      tag_filter = optional(string)
+    })))
     # or clean all project's repositories
     clean_all = optional(bool)
+    # parameters
+    parameters = optional(object({
+      grace = optional(string)
+      allow_tagged = optional(bool)
+      keep = optional(string)
+      tag_filter = optional(string)
+    }))
   }))
   default = []
   validation {
