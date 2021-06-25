@@ -54,7 +54,7 @@ resource "google_app_engine_application" "this" {
 # 2. Cloud Scheduler job that triggers an action via HTTP
 resource "google_cloud_scheduler_job" "this" {
   for_each = {
-    for idx, repo in concat(local.fetched_repositories, local.repositories): idx => repo
+    for idx, repo in concat(local.fetched_repositories, local.repositories) : idx => repo
   }
 
   # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
@@ -81,7 +81,7 @@ resource "google_cloud_scheduler_job" "this" {
   http_target {
     http_method = "POST"
     uri         = "${google_cloud_run_service.this.status[0].url}/http"
-    body = jsonencode(tomap(each.value))
+    body        = base64encode(jsonencode(each.value))
     oidc_token {
       service_account_email = google_service_account.invoker.email
     }

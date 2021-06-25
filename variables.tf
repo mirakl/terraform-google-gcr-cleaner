@@ -68,7 +68,7 @@ variable "gcr_repositories" {
       repo = string
       grace = optional(string)
       allow_tagged = optional(bool)
-      keep = optional(string)
+      keep = optional(number)
       tag_filter = optional(string)
     })))
     # or clean all project's repositories
@@ -77,7 +77,7 @@ variable "gcr_repositories" {
     parameters = optional(object({
       grace = optional(string)
       allow_tagged = optional(bool)
-      keep = optional(string)
+      keep = optional(number)
       tag_filter = optional(string)
     }))
   }))

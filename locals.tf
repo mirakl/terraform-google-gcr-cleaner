@@ -22,13 +22,23 @@ locals {
   repositories = flatten([
     for gcr in var.gcr_repositories : [
       for repo in gcr.repositories : gcr.storage_region != null
-        ? merge({
-          repo = "${gcr.storage_region}.gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}" },
-          repo
+        ? merge(
+            repo,
+            {
+              repo = "${gcr.storage_region}.gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}"
+              grace = repo.grace != null ? repo.grace : "0"
+              allow_tagged = repo.allow_tagged !- null ? repo.allow_tagged : false,
+              tag_filter = repo.tag_filter != null ? repo.tag_filter : ""
+            }
         )
-        : merge({
-          repo = "gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}" },
-          repo
+        : merge(
+            repo,
+            {
+              repo = "gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}"
+              grace = repo.grace != null ? repo.grace : "0"
+              allow_tagged = repo.allow_tagged !- null ? repo.allow_tagged : false,
+              tag_filter = repo.tag_filter != null ? repo.tag_filter : ""
+            }
         )
     ] if gcr.repositories != null
   ])
@@ -36,7 +46,16 @@ locals {
   # merge all fetched repositories with external data in one list
   fetched_repositories = flatten([
     for data in data.external.this : [
-      for repo in jsondecode(data.result.repositories) : merge({ "repo": repo.name }, local.options[repo.project_id])
+      for repo in jsondecode(data.result.repositories) : merge(
+        local.options[repo.project_id],
+        {
+          "repo": repo.name
+          grace = local.options[repo.project_id].grace != null ? local.options[repo.project_id].grace : "0"
+          allow_tagged = local.options[repo.project_id].allow_tagged != null ? local.options[repo.project_id].allow_tagged : false
+          keep = local.options[repo.project_id].keep != null ? local.options[repo.project_id].keep : 0
+          tag_filter = local.options[repo.project_id].tag_filter != null ? local.options[repo.project_id].tag_filter : ""
+        }
+      )
     ]
   ])
 
