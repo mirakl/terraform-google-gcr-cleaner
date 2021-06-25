@@ -25,18 +25,18 @@ locals {
         ? merge(
             repo,
             {
-              repo = "${gcr.storage_region}.gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}"
-              grace = repo.grace != null ? repo.grace : "0"
-              allow_tagged = repo.allow_tagged !- null ? repo.allow_tagged : false,
+              repo = "${gcr.storage_region}.gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}",
+              grace = repo.grace != null ? repo.grace : "0",
+              allow_tagged = repo.allow_tagged != null ? repo.allow_tagged : false,
               tag_filter = repo.tag_filter != null ? repo.tag_filter : ""
             }
         )
         : merge(
             repo,
             {
-              repo = "gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}"
-              grace = repo.grace != null ? repo.grace : "0"
-              allow_tagged = repo.allow_tagged !- null ? repo.allow_tagged : false,
+              repo = "gcr.io/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.repo}",
+              grace = repo.grace != null ? repo.grace : "0",
+              allow_tagged = repo.allow_tagged != null ? repo.allow_tagged : false,
               tag_filter = repo.tag_filter != null ? repo.tag_filter : ""
             }
         )
@@ -50,9 +50,9 @@ locals {
         local.options[repo.project_id],
         {
           "repo": repo.name
-          grace = local.options[repo.project_id].grace != null ? local.options[repo.project_id].grace : "0"
-          allow_tagged = local.options[repo.project_id].allow_tagged != null ? local.options[repo.project_id].allow_tagged : false
-          keep = local.options[repo.project_id].keep != null ? local.options[repo.project_id].keep : 0
+          grace = local.options[repo.project_id].grace != null ? local.options[repo.project_id].grace : "0",
+          allow_tagged = local.options[repo.project_id].allow_tagged != null ? local.options[repo.project_id].allow_tagged : false,
+          keep = local.options[repo.project_id].keep != null ? local.options[repo.project_id].keep : 0,
           tag_filter = local.options[repo.project_id].tag_filter != null ? local.options[repo.project_id].tag_filter : ""
         }
       )
