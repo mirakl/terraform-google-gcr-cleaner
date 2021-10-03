@@ -56,6 +56,35 @@ variable "gcr_cleaner_image" {
   }
 }
 
+variable "gcr_cleaner_allow_tagged" {
+  description = "If set to true, will check all images including tagged. If unspecified, the default will only delete untagged images."
+  type        = bool
+  default     = false
+}
+
+variable "gcr_cleaner_dry_run" {
+  description = "If set to true, will not delete anything and outputs what would have been deleted."
+  type        = bool
+  default     = false
+}
+
+variable "gcr_cleaner_grace" {
+  description = "Amount of grace to allow when deleting images, eg 24h will not delete younger than 24 hours."
+  type        = string
+  default     = "0h"
+}
+
+variable "gcr_cleaner_keep" {
+  description = "If an integer is provided, it will always keep that minimum number of images. Note that it will not consider images inside the grace duration."
+  type        = number
+  default     = 0
+}
+variable "gcr_cleaner_recursive" {
+  description = "If set to true, will recursively search all child repositories."
+  type        = bool
+  default     = false
+}
+
 variable "gcr_repositories" {
   description = "List of Google Container Registries objects."
   type = list(object({
@@ -77,6 +106,12 @@ variable "gcr_repositories" {
     ]) == 0 : true
     error_message = "One of the repositories in the list doesn't match the requirements. You have to provide repositories or clean_all, not both at the same time or none of them."
   }
+}
+
+variable "gcr_cleaner_tag_filter" {
+  description = "Used for tags regexp definition to define pattern to clean."
+  type        = string
+  default     = ""
 }
 
 variable "cloud_scheduler_job_schedule" {

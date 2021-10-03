@@ -7,7 +7,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="unreleased"></a>
 ## [Unreleased]
-
+Enhancements:
+- Support all [payload parameters](https://github.com/sethvargo/gcr-cleaner#payload--parameters)
 
 
 <a name="v0.6.0"></a>
