@@ -1,5 +1,7 @@
 # Enable the Google APIs
 resource "google_project_service" "this" {
+  project = data.google_project.this.project_id
+
   for_each = {
     for api in local.google_apis : api => api
   }

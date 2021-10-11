@@ -131,3 +131,9 @@ variable "cloud_scheduler_job_max_doublings" {
   type        = number
   default     = 5
 }
+
+variable "project_id" {
+  type        = string
+  description = "The project in which to deploy resources."
+  default     = ""
+}

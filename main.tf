@@ -3,6 +3,7 @@
 resource "google_cloud_run_service" "this" {
   name     = var.cloud_run_service_name
   location = var.cloud_run_service_location
+  project  = local.google_project_id
 
   template {
     metadata {
@@ -60,6 +61,7 @@ resource "google_cloud_scheduler_job" "this" {
   # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
   # and be no more than 500 characters.
   name             = "gcr-cleaner_${replace(each.value, "/[.\\/]/", "_")}"
+  project          = local.google_project_id
   description      = "Cleanup ${each.value}"
   schedule         = var.cloud_scheduler_job_schedule
   time_zone        = var.cloud_scheduler_job_time_zone
