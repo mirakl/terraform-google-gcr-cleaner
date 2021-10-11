@@ -31,4 +31,17 @@ locals {
       for repo in jsondecode(data.result.repositories) : repo
     ]
   ])
+
+  buckets = [
+    for repo in var.gcr_repositories : repo.storage_region != null ? "${repo.storage_region}.artifacts.${repo.project_id != null ? repo.project_id : local.google_project_id}.appspot.com" : "artifacts.${repo.project_id != null ? repo.project_id : local.google_project_id}.appspot.com"
+  ]
+
+  # uniform_bucket_level_access or ACL
+  google_storage_bucket_iam_member = [
+    for bucket in local.buckets : bucket if data.google_storage_bucket.bucket[bucket].uniform_bucket_level_access
+  ]
+
+  google_storage_bucket_access_control = [
+    for bucket in local.buckets : bucket if !data.google_storage_bucket.bucket[bucket].uniform_bucket_level_access
+  ]
 }

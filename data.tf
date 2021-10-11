@@ -13,3 +13,9 @@ data "external" "this" {
     google_project_id = each.value.google_project_id
   }
 }
+
+data "google_storage_bucket" "bucket" {
+  for_each = toset(local.buckets)
+
+  name = each.value
+}
