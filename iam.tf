@@ -18,3 +18,23 @@ resource "google_cloud_run_service_iam_binding" "this" {
     "serviceAccount:${google_service_account.invoker.email}"
   ]
 }
+
+# Allow the account that is running terraform permissions to act-as
+# the service-account, required for deploying a CloudRun service
+resource "google_service_account_iam_member" "tf-cleaner" {
+  count = local.running_as_a_service_account ? 1 : 0
+
+  service_account_id = google_service_account.cleaner.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${data.google_client_openid_userinfo.terraform.email}"
+}
+
+# Allow the account that is running terraform permissions to act-as
+# the service-account, required for deploying a CloudScheduler service
+resource "google_service_account_iam_member" "tf-invoker" {
+  count = local.running_as_a_service_account ? 1 : 0
+
+  service_account_id = google_service_account.invoker.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${data.google_client_openid_userinfo.terraform.email}"
+}

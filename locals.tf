@@ -31,4 +31,6 @@ locals {
       for repo in jsondecode(data.result.repositories) : repo
     ]
   ])
+
+  running_as_a_service_account = length(regexall(".*@.*[.]gserviceaccount[.]com", data.google_client_openid_userinfo.terraform.email)) > 0
 }

@@ -13,3 +13,5 @@ data "external" "this" {
     google_project_id = each.value.google_project_id
   }
 }
+
+data "google_client_openid_userinfo" "terraform" {}
