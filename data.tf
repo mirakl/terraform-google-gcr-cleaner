@@ -4,7 +4,7 @@ data "google_project" "this" {}
 # get all repositories of a given project
 data "external" "this" {
   for_each = {
-    for repo in local.project_all_repositories : repo.google_project_id => repo
+    for repo in local.project_all_repositories : "${repo.google_project_id}/${repo.gcr_host_name}" => repo
   }
 
   program = ["${path.module}/scripts/get_all_repositories.sh"]
