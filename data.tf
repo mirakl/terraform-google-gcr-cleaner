@@ -1,5 +1,7 @@
 # get project details
-data "google_project" "this" {}
+data "google_project" "this" {
+  project_id = var.project_id
+}
 
 # get all repositories of a given project
 data "external" "this" {

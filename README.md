@@ -117,6 +117,7 @@ No modules.
 | <a name="input_disable_on_destroy"></a> [disable\_on\_destroy](#input\_disable\_on\_destroy) | If `true`, disable the service when the terraform resource is destroyed. May be useful in the event that a project is long-lived but the infrastructure running in that project changes frequently. | `bool` | `false` | no |
 | <a name="input_gcr_cleaner_image"></a> [gcr\_cleaner\_image](#input\_gcr\_cleaner\_image) | The docker image of the gcr cleaner to deploy to Cloud Run. | `string` | `"gcr.io/gcr-cleaner/gcr-cleaner"` | no |
 | <a name="input_gcr_repositories"></a> [gcr\_repositories](#input\_gcr\_repositories) | List of Google Container Registries objects. | <pre>list(object({<br>    # google project id, if ommited, it will be assigned `google_project_id` variable value<br>    project_id = optional(string)<br>    # location of the storage bucket<br>    storage_region = optional(string)<br>    # docker image repositories to clean<br>    repositories = optional(list(string))<br>    # or clean all project's repositories<br>    clean_all = optional(bool)<br>  }))</pre> | `[]` | no |
+| <a name="project_id"></a> [project\_id](#input\project\_id) | Specifies the project where resources should be deployed | `string` | `""` | no |
 
 ## Outputs
 
