@@ -1,11 +1,9 @@
 # get project details
 data "google_project" "this" {}
 
-# get all repositories of a given project
+# get all repositories of a given project/filter
 data "external" "this" {
-  for_each = {
-    for repo in local.project_all_repositories : repo.google_project_id => repo
-  }
+  for_each = local.project_all_repositories_map
 
   program = ["${path.module}/scripts/get_all_repositories.sh"]
   query = {

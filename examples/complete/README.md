@@ -7,9 +7,9 @@ Complete usage of the module (setting values for all variables)
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.15.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.10 |
 | <a name="requirement_external"></a> [external](#requirement\_external) | >= 2.1.0 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.62.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.1.0 |
 
 ## Providers
 
@@ -19,7 +19,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_gcr_cleaner"></a> [gcr\_cleaner](#module\_gcr\_cleaner) | ../.. |  |
+| <a name="module_gcr_cleaner"></a> [gcr\_cleaner](#module\_gcr\_cleaner) | ../.. | n/a |
 
 ## Resources
 
@@ -29,8 +29,8 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The project ID to create resources under. | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | The region where resources will be created. | `string` | n/a | yes |
+| <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The project ID to create resources under. | `string` | `"project-terraform-test-dcbe3d0"` | no |
+| <a name="input_region"></a> [region](#input\_region) | The region where resources will be created. | `string` | `"europe-west3"` | no |
 
 ## Outputs
 

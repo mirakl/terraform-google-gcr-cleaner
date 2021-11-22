@@ -37,7 +37,7 @@ resource "google_cloud_run_service" "this" {
 # just import google_app_engine_application resource before applying:
 # terraform import google_app_engine_application.this your-project-id
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/app_engine_application
-# 
+#
 # /!\ If you want to create your app engine app using terraform, just set `create_app_engine_app` variable to true
 # and provide the app engine app location:
 # create_app_engine_app           = true
@@ -54,21 +54,19 @@ resource "google_app_engine_application" "this" {
 # 2. Cloud Scheduler job that triggers an action via HTTP
 resource "google_cloud_scheduler_job" "this" {
   for_each = {
-    for repo in concat(local.fetched_repositories, local.repositories) : repo => repo
+    # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
+    # and be no more than 500 characters.
+    # First replace all special characters with '-',
+    # then replace any at least 2 consecutive `-` characters with one '-'.
+    for repo in toset(local.fetched_repositories) : replace(replace("${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
   }
 
-  # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
-  # and be no more than 500 characters.
-  name             = "gcr-cleaner_${replace(each.value, "/[.\\/]/", "_")}"
-  description      = "Cleanup ${each.value}"
+  name             = each.key
+  description      = "Cleanup ${each.value.repo} using ${each.value.filter} filter"
   schedule         = var.cloud_scheduler_job_schedule
   time_zone        = var.cloud_scheduler_job_time_zone
   attempt_deadline = "${var.cloud_scheduler_job_attempt_deadline}s"
-  # Location must equal to the one of the App Engine app that is associated with this project
-  # /!\ Note that two locations, called europe-west and us-central in App Engine commands, 
-  # are called, respectively, europe-west1 and us-central1 in Cloud Scheduler commands.
-  # More on https://cloud.google.com/appengine/docs/locations
-  region = contains(["europe-west", "us-central"], var.app_engine_application_location) == true ? "${var.app_engine_application_location}1" : var.app_engine_application_location
+  region           = local.cloud_scheduler_job_location
 
   retry_config {
     retry_count          = var.cloud_scheduler_job_retry_count
@@ -81,9 +79,7 @@ resource "google_cloud_scheduler_job" "this" {
   http_target {
     http_method = "POST"
     uri         = "${google_cloud_run_service.this.status[0].url}/http"
-    # TODO implement all payload parameters
-    # https://github.com/sethvargo/gcr-cleaner#payload--parameters
-    body = base64encode(jsonencode(tomap({ "repo" = each.value })))
+    body        = base64encode("{\"allow_tagged\":${each.value.allow_tagged}, \"grace\":\"${each.value.grace}\", \"keep\":${each.value.keep}, \"repo\":\"${each.value.repo}\", \"tag_filter\":\"${each.value.tag_filter}\"}")
     oidc_token {
       service_account_email = google_service_account.invoker.email
     }
