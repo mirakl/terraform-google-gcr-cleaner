@@ -9,7 +9,7 @@ module "gcr_cleaner" {
   cloud_run_service_location               = "europe-north1"
   cloud_run_service_maximum_instances      = 300
   cloud_run_service_timeout_seconds        = 300
-  gcr_cleaner_image                        = "europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner"
+  gcr_cleaner_image                        = "europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest"
   cloud_scheduler_job_schedule             = "0 2 * * 5"
   cloud_scheduler_job_time_zone            = "Europe/Helsinki"
   cloud_scheduler_job_attempt_deadline     = 600

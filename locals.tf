@@ -19,35 +19,15 @@ locals {
   # Set default values for optional fields.
   project_all_repositories = [
     for repo in var.gcr_repositories : {
-      gcr_host_name     = "${repo.storage_region != null ? "${repo.storage_region}.gcr.io" : "gcr.io"}"
-      google_project_id = "${repo.project_id != null ? repo.project_id : local.google_project_id}"
-      repo              = "${repo.storage_region != null ? "${repo.storage_region}.gcr.io" : "gcr.io"}/${repo.project_id != null ? repo.project_id : local.google_project_id}"
-      grace             = repo.parameters != null ? (repo.parameters.grace != null ? repo.parameters.grace : "0") : "0"
-      allow_tagged      = repo.parameters != null ? (repo.parameters.allow_tagged != null ? repo.parameters.allow_tagged : false) : false
-      keep              = repo.parameters != null ? (repo.parameters.keep != null ? repo.parameters.keep : "0") : "0"
-      tag_filter        = repo.parameters != null ? (repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "") : ""
-      filter            = repo.parameters != null ? "grace-${repo.parameters.grace != null ? repo.parameters.grace : "0"}-allow_tagged-${repo.parameters.allow_tagged != null ? repo.parameters.allow_tagged : false}-keep-${repo.parameters.keep != null ? repo.parameters.keep : "0"}-tag_filter-${repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "no"}" : "delete-all-untagged-images"
+      repo         = "${repo.storage_region != null ? "${repo.storage_region}.gcr.io" : "gcr.io"}/${repo.project_id != null ? repo.project_id : local.google_project_id}"
+      grace        = repo.parameters != null ? (repo.parameters.grace != null ? repo.parameters.grace : "0") : "0"
+      allow_tagged = repo.parameters != null ? (repo.parameters.allow_tagged != null ? repo.parameters.allow_tagged : false) : false
+      keep         = repo.parameters != null ? (repo.parameters.keep != null ? repo.parameters.keep : "0") : "0"
+      tag_filter   = repo.parameters != null ? (repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "") : ""
+      recursive    = true
+      filter       = repo.parameters != null ? "grace-${repo.parameters.grace != null ? repo.parameters.grace : "0"}-allow_tagged-${repo.parameters.allow_tagged != null ? repo.parameters.allow_tagged : false}-keep-${repo.parameters.keep != null ? repo.parameters.keep : "0"}-tag_filter-${repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "no"}" : "delete-all-untagged-images-recursive"
     } if repo.clean_all == true
   ]
-
-  # create project_all_repositories_map, adding unique id for each item
-  # in order to save parameters that will be merged later with data retrieved
-  # from data.external
-  project_all_repositories_map = {
-    for item in local.project_all_repositories : "${item.repo}-${item.filter}" => item
-  }
-
-  # merge all fetched repositories using data.external in one list
-  fetched_repositories_from_external_data = flatten([
-    for key, element in data.external.this : [
-      for item in jsondecode(element.result.repositories) : merge(
-        local.project_all_repositories_map[key],
-        {
-          repo = item
-        }
-      )
-    ]
-  ])
 
   # create repositories list for projects having explicit repositories definition.
   # Set default values for optional fields
@@ -60,14 +40,15 @@ locals {
           allow_tagged = repo.allow_tagged != null ? repo.allow_tagged : false
           keep         = repo.keep != null ? repo.keep : "0"
           tag_filter   = repo.tag_filter != null ? repo.tag_filter : ""
-          filter       = "grace-${repo.grace != null ? repo.grace : "0"}-allow_tagged-${repo.allow_tagged != null ? repo.allow_tagged : false}-keep-${repo.keep != null ? repo.keep : "0"}-tag_filter-${repo.tag_filter != null ? repo.tag_filter : "no"}"
+          recursive    = repo.recursive != null ? repo.recursive : false
+          filter       = "grace-${repo.grace != null ? repo.grace : "0"}-allow_tagged-${repo.allow_tagged != null ? repo.allow_tagged : false}-keep-${repo.keep != null ? repo.keep : "0"}-tag_filter-${repo.tag_filter != null ? repo.tag_filter : "no"}-recursive-${repo.recursive != null ? repo.recursive : false}"
         }
       )
     ] if gcr.repositories != null
   ])
 
   # create final repositories list
-  fetched_repositories = concat(local.fetched_repositories_from_external_data, local.repositories)
+  fetched_repositories = concat(local.project_all_repositories, local.repositories)
 
   # group repositories by project
   repositories_by_project = {

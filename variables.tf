@@ -49,10 +49,11 @@ variable "app_engine_application_location" {
 variable "gcr_cleaner_image" {
   description = "The docker image of the gcr cleaner to deploy to Cloud Run."
   type        = string
-  default     = "gcr.io/gcr-cleaner/gcr-cleaner"
+  # Using latest because of https://github.com/GoogleCloudPlatform/gcr-cleaner/issues/52
+  default = "gcr.io/gcr-cleaner/gcr-cleaner:latest"
   validation {
-    condition     = can(regex("^((asia|europe|us)-docker\\.pkg\\.dev\\/gcr-cleaner\\/gcr-cleaner\\/gcr-cleaner|gcr\\.io\\/gcr-cleaner\\/gcr-cleaner)$", var.gcr_cleaner_image))
-    error_message = "The gcr cleaner image must be one of `gcr.io/gcr-cleaner/gcr-cleaner`, `asia-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner`, `europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner`, or `us-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner`."
+    condition     = can(regex("^((asia|europe|us)-docker\\.pkg\\.dev\\/gcr-cleaner\\/gcr-cleaner\\/gcr-cleaner:latest|gcr\\.io\\/gcr-cleaner\\/gcr-cleaner:latest)$", var.gcr_cleaner_image))
+    error_message = "The gcr cleaner image must be one of `gcr.io/gcr-cleaner/gcr-cleaner:latest`, `asia-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest`, `europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest`, or `us-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest`."
   }
 }
 
@@ -69,6 +70,7 @@ list(object({
       allow_tagged = If set to true, will check all images including tagged. If unspecified, the default will only delete untagged images (optional(bool))
       keep         = If an integer is provided, it will always keep that minimum number of images. Note that it will not consider images inside the `grace` duration (optional(string))
       tag_filter   = Used for tags regexp definition to define pattern to clean, requires `allow_tagged` must be true. For example: use `"^dev.+$"` to limit cleaning only on the tags with beginning with is `dev`. The default is no filtering (optional(string))
+      recursive    = If set to true, will recursively search all child repositories (optional(bool))
     }))))
     clean_all       = Set to `true` to clean all project's repositories (optional(bool))
     parameters      = Map of parameters to apply to all repositories when `clean_all` is set to `true` (optional(object({
@@ -90,6 +92,7 @@ EOF
       allow_tagged = optional(bool)
       keep         = optional(string)
       tag_filter   = optional(string)
+      recursive    = optional(bool)
     })))
     clean_all = optional(bool)
     parameters = optional(object({

@@ -21,6 +21,8 @@ resource "google_cloud_run_service" "this" {
     }
   }
 
+  autogenerate_revision_name = true
+
   traffic {
     percent         = 100
     latest_revision = true
@@ -79,7 +81,7 @@ resource "google_cloud_scheduler_job" "this" {
   http_target {
     http_method = "POST"
     uri         = "${google_cloud_run_service.this.status[0].url}/http"
-    body        = base64encode("{\"allow_tagged\":${each.value.allow_tagged}, \"grace\":\"${each.value.grace}\", \"keep\":${each.value.keep}, \"repo\":\"${each.value.repo}\", \"tag_filter\":\"${each.value.tag_filter}\"}")
+    body        = base64encode("{\"allow_tagged\":${each.value.allow_tagged}, \"grace\":\"${each.value.grace}\", \"keep\":${each.value.keep}, \"repos\":[\"${each.value.repo}\"], \"tag_filter\":\"${each.value.tag_filter}\", \"recursive\":${each.value.recursive}}")
     oidc_token {
       service_account_email = google_service_account.invoker.email
     }

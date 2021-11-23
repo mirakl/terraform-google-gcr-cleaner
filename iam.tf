@@ -1,7 +1,7 @@
 # Grant cleaner service account access to delete references in Google Container Registry
 resource "google_storage_bucket_access_control" "this" {
   for_each = {
-    for item in toset(local.project_storage_region) : "${item.storage_region}${item.project_id}" => item
+    for item in toset(local.project_storage_region) : "${item.storage_region}.${item.project_id}" => item
   }
 
   bucket = each.value.storage_region != "" ? "${each.value.storage_region}.artifacts.${each.value.project_id}.appspot.com" : "artifacts.${each.value.project_id}.appspot.com"
@@ -18,4 +18,10 @@ resource "google_cloud_run_service_iam_binding" "this" {
   members = [
     "serviceAccount:${google_service_account.invoker.email}"
   ]
+}
+
+resource "google_project_iam_member" "this" {
+  project = google_cloud_run_service.this.project
+  role    = "roles/browser"
+  member  = "serviceAccount:${google_service_account.cleaner.email}"
 }
