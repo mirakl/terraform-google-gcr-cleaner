@@ -25,28 +25,21 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.17
       - name: "Install pre-commit tools: terraform-docs, tflint & tfsec"
         run: |
           mkdir -p $TF_PLUGIN_CACHE_DIR
-          GO111MODULE="on" go get -u github.com/terraform-docs/terraform-docs
+          go install github.com/terraform-docs/terraform-docs@latest
           sudo mv $(go env GOPATH)/bin/terraform-docs /usr/local/bin/terraform-docs
           curl -sSLf "$(curl -sS https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip
           unzip tflint.zip && rm tflint.zip
           sudo mv tflint /usr/local/bin/
-          go get -u github.com/tfsec/tfsec/cmd/tfsec
+          go install github.com/aquasecurity/tfsec/cmd/tfsec@latest
           sudo mv $(go env GOPATH)/bin/tfsec /usr/local/bin/tfsec
       - uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.15.1
-      - name: Run terraform init on root & examples folders
-        run: |
-          for DIR in . $(find ./examples -type d); do
-            pushd $DIR
-            terraform init
-            popd
-          done
+          terraform_version: 1.0.10
       - name: Run pre-commit hooks
         uses: pre-commit/action@v2.0.0
-        with:
-          extra_args: --all-files --verbose
+        env:
+          GO111MODULE: auto
