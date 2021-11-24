@@ -85,6 +85,7 @@ resource "google_cloud_scheduler_job" "this" {
       allow_tagged = tobool(each.value.allow_tagged),
       grace        = each.value.grace,
       keep         = tonumber(each.value.keep),
+      repos        = [each.value.repo],
       tag_filter   = each.value.tag_filter,
       recursive    = tobool(each.value.recursive),
     }))
