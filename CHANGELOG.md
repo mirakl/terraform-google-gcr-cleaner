@@ -10,6 +10,18 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+<a name="v1.0.0"></a>
+## [v1.0.0] - 2021-11-24
+Bug Fixes:
+- Adding repos parameter to payload ([#27](https://github.com/mirakl/terraform-gcr-cleaner/issues/27))
+
+Continous Integration:
+- Upgrade terraform version ([#26](https://github.com/mirakl/terraform-gcr-cleaner/issues/26))
+
+Features:
+- Implementing all payload parameters ([#24](https://github.com/mirakl/terraform-gcr-cleaner/issues/24))
+
+
 <a name="v0.6.0"></a>
 ## [v0.6.0] - 2021-05-03
 Documentation:
@@ -49,7 +61,8 @@ Features:
 - First Implementation of GCR Cleaner ([#1](https://github.com/mirakl/terraform-gcr-cleaner/issues/1))
 
 
-[Unreleased]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.6.0...v1.0.0
 [v0.6.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.3.0...v0.4.0
