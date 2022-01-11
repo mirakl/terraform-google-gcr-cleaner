@@ -82,12 +82,13 @@ resource "google_cloud_scheduler_job" "this" {
     http_method = "POST"
     uri         = "${google_cloud_run_service.this.status[0].url}/http"
     body = base64encode(jsonencode({
-      allow_tagged = tobool(each.value.allow_tagged),
-      grace        = each.value.grace,
-      keep         = tonumber(each.value.keep),
-      repos        = [each.value.repo],
-      tag_filter   = each.value.tag_filter,
-      recursive    = tobool(each.value.recursive),
+      grace          = each.value.grace,
+      keep           = tonumber(each.value.keep),
+      repos          = [each.value.repo],
+      tag_filter     = each.value.tag_filter,
+      tag_filter_any = each.value.tag_filter_any,
+      tag_filter_all = each.value.tag_filter_all,
+      recursive      = tobool(each.value.recursive),
     }))
     oidc_token {
       service_account_email = google_service_account.invoker.email

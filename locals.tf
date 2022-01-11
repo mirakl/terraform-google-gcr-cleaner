@@ -19,13 +19,14 @@ locals {
   # Set default values for optional fields.
   project_all_repositories = [
     for repo in var.gcr_repositories : {
-      repo         = "${repo.storage_region != null ? "${repo.storage_region}.gcr.io" : "gcr.io"}/${repo.project_id != null ? repo.project_id : local.google_project_id}"
-      grace        = repo.parameters != null ? (repo.parameters.grace != null ? repo.parameters.grace : "0") : "0"
-      allow_tagged = repo.parameters != null ? (repo.parameters.allow_tagged != null ? repo.parameters.allow_tagged : false) : false
-      keep         = repo.parameters != null ? (repo.parameters.keep != null ? repo.parameters.keep : "0") : "0"
-      tag_filter   = repo.parameters != null ? (repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "") : ""
-      recursive    = true
-      filter       = repo.parameters != null ? "grace-${repo.parameters.grace != null ? repo.parameters.grace : "0"}-allow_tagged-${repo.parameters.allow_tagged != null ? repo.parameters.allow_tagged : false}-keep-${repo.parameters.keep != null ? repo.parameters.keep : "0"}-tag_filter-${repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "no"}" : "delete-all-untagged-images-recursive"
+      repo           = "${repo.storage_region != null ? "${repo.storage_region}.gcr.io" : "gcr.io"}/${repo.project_id != null ? repo.project_id : local.google_project_id}"
+      grace          = repo.parameters != null ? (repo.parameters.grace != null ? repo.parameters.grace : "0") : "0"
+      keep           = repo.parameters != null ? (repo.parameters.keep != null ? repo.parameters.keep : "0") : "0"
+      tag_filter     = repo.parameters != null ? (repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "") : ""
+      tag_filter_any = repo.parameters != null ? (repo.parameters.tag_filter_any != null ? repo.parameters.tag_filter_any : "") : ""
+      tag_filter_all = repo.parameters != null ? (repo.parameters.ttag_filter_allag_filter != null ? repo.parameters.tag_filter_all : "") : ""
+      recursive      = true
+      filter         = repo.parameters != null ? "grace-${repo.parameters.grace != null ? repo.parameters.grace : "0"}-keep-${repo.parameters.keep != null ? repo.parameters.keep : "0"}-tag_filter-${repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "no"}-tag_filter_any-${repo.parameters.tag_filter_any != null ? repo.parameters.tag_filter_any : "no"}-tag_filter_any-${repo.parameters.tag_filter_any != null ? repo.parameters.tag_filter_any : "no"}" : "delete-all-untagged-images-recursive"
     } if repo.clean_all == true
   ]
 
@@ -35,13 +36,14 @@ locals {
     for gcr in var.gcr_repositories : [
       for repo in gcr.repositories : merge(repo,
         {
-          repo         = "${gcr.storage_region != null ? "${gcr.storage_region}.gcr.io" : "gcr.io"}/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.name}"
-          grace        = repo.grace != null ? repo.grace : "0"
-          allow_tagged = repo.allow_tagged != null ? repo.allow_tagged : false
-          keep         = repo.keep != null ? repo.keep : "0"
-          tag_filter   = repo.tag_filter != null ? repo.tag_filter : ""
-          recursive    = repo.recursive != null ? repo.recursive : false
-          filter       = "grace-${repo.grace != null ? repo.grace : "0"}-allow_tagged-${repo.allow_tagged != null ? repo.allow_tagged : false}-keep-${repo.keep != null ? repo.keep : "0"}-tag_filter-${repo.tag_filter != null ? repo.tag_filter : "no"}-recursive-${repo.recursive != null ? repo.recursive : false}"
+          repo           = "${gcr.storage_region != null ? "${gcr.storage_region}.gcr.io" : "gcr.io"}/${gcr.project_id != null ? gcr.project_id : local.google_project_id}/${repo.name}"
+          grace          = repo.grace != null ? repo.grace : "0"
+          keep           = repo.keep != null ? repo.keep : "0"
+          tag_filter     = repo.tag_filter != null ? repo.tag_filter : ""
+          tag_filter_any = repo.tag_filter_any != null ? repo.tag_filter_any : ""
+          tag_filter_all = repo.tag_filter_all != null ? repo.tag_filter_all : ""
+          recursive      = repo.recursive != null ? repo.recursive : false
+          filter         = "grace-${repo.grace != null ? repo.grace : "0"}-keep-${repo.keep != null ? repo.keep : "0"}-tag_filter-${repo.tag_filter != null ? repo.tag_filter : "no"}-tag_filter_any-${repo.tag_filter_any != null ? repo.tag_filter_any : "no"}-tag_filter_all-${repo.tag_filter_all != null ? repo.tag_filter_all : "no"}-recursive-${repo.recursive != null ? repo.recursive : false}"
         }
       )
     ] if gcr.repositories != null
