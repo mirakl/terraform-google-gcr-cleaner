@@ -67,7 +67,6 @@ list(object({
     repositories = Docker image repositories to clean (optional(list(object({
       name           = Name of the repository (string)
       grace          = Relative duration in which to ignore references. This value is specified as a time duration value like "5s" or "3h". If set, refs newer than the duration will not be deleted. If unspecified, the default is no grace period (all untagged image refs are deleted) (optional(string))
-      allow_tagged   = (Deprecated) This option is deprecated and has no effect. By default, GCR Cleaner will not delete tagged images. To delete tagged images, specify `tag_filter_any` or `tag_filter_all` (optional(bool))
       keep           = If an integer is provided, it will always keep that minimum number of images. Note that it will not consider images inside the `grace` duration (optional(string))
       tag_filter     = (Deprecated) If specified, any image where the first tag matches this given regular expression will be deleted. The image will not be deleted if other tags match the regular expression (optional(string))
       tag_filter_any = If specified, any image with at least one tag that matches this given regular expression will be deleted. The image will be deleted even if it has other tags that do not match the given regular expression (optional(string))
@@ -77,7 +76,6 @@ list(object({
     clean_all  = Set to `true` to clean all project's repositories (optional(bool))
     parameters = Map of parameters to apply to all repositories when `clean_all` is set to `true` (optional(object({
       grace          = Relative duration in which to ignore references. This value is specified as a time duration value like "5s" or "3h". If set, refs newer than the duration will not be deleted. If unspecified, the default is no grace period (all untagged image refs are deleted) (optional(string))
-      allow_tagged   = (Deprecated) This option is deprecated and has no effect. By default, GCR Cleaner will not delete tagged images. To delete tagged images, specify `tag_filter_any` or `tag_filter_all` (optional(bool))
       keep           = If an integer is provided, it will always keep that minimum number of images. Note that it will not consider images inside the `grace` duration (optional(string))
       tag_filter     = (Deprecated) If specified, any image where the first tag matches this given regular expression will be deleted. The image will not be deleted if other tags match the regular expression (optional(string))
       tag_filter_any = If specified, any image with at least one tag that matches this given regular expression will be deleted. The image will be deleted even if it has other tags that do not match the given regular expression (optional(string))
@@ -93,7 +91,6 @@ EOF
     repositories = optional(list(object({
       name           = string
       grace          = optional(string)
-      allow_tagged   = optional(bool)
       keep           = optional(string)
       tag_filter     = optional(string)
       tag_filter_any = optional(string)
@@ -103,7 +100,6 @@ EOF
     clean_all = optional(bool)
     parameters = optional(object({
       grace          = optional(string)
-      allow_tagged   = optional(bool)
       keep           = optional(string)
       tag_filter     = optional(string)
       tag_filter_any = optional(string)
