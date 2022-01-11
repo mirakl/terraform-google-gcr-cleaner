@@ -20,6 +20,8 @@ resource "google_cloud_run_service_iam_binding" "this" {
   ]
 }
 
+# Grant cleaner service account roles/browser role in order to query the registry.
+# This is the most minimal permission.
 resource "google_project_iam_member" "this" {
   project = google_cloud_run_service.this.project
   role    = "roles/browser"
