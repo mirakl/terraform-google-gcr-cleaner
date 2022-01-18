@@ -14,6 +14,21 @@ locals {
   # More on https://cloud.google.com/appengine/docs/locations
   cloud_scheduler_job_location = contains(["europe-west", "us-central"], var.app_engine_application_location) == true ? "${var.app_engine_application_location}1" : var.app_engine_application_location
 
+  # create a list of buckets from the gcr_repositories input
+  buckets = [
+    for repo in var.gcr_repositories : repo.storage_region != null ? "${repo.storage_region}.artifacts.${repo.project_id != null ? repo.project_id : local.google_project_id}.appspot.com" : "artifacts.${repo.project_id != null ? repo.project_id : local.google_project_id}.appspot.com"
+  ]
+
+  # Buckets having uniform_bucket_level_access = true
+  google_storage_bucket_iam_member = [
+    for bucket in local.buckets : bucket if data.google_storage_bucket.bucket[bucket].uniform_bucket_level_access
+  ]
+
+  # Buckets having uniform_bucket_level_access = false
+  google_storage_bucket_access_control = [
+    for bucket in local.buckets : bucket if !data.google_storage_bucket.bucket[bucket].uniform_bucket_level_access
+  ]
+
   # create project_all_repositories list, appending storage_region and project_id when ommited
   # for projects having clean_all = true.
   # Set default values for optional fields.
@@ -24,7 +39,7 @@ locals {
       keep           = repo.parameters != null ? (repo.parameters.keep != null ? repo.parameters.keep : "0") : "0"
       tag_filter     = repo.parameters != null ? (repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "") : ""
       tag_filter_any = repo.parameters != null ? (repo.parameters.tag_filter_any != null ? repo.parameters.tag_filter_any : "") : ""
-      tag_filter_all = repo.parameters != null ? (repo.parameters.ttag_filter_allag_filter != null ? repo.parameters.tag_filter_all : "") : ""
+      tag_filter_all = repo.parameters != null ? (repo.parameters.tag_filter_all != null ? repo.parameters.tag_filter_all : "") : ""
       recursive      = true
       filter         = repo.parameters != null ? "grace-${repo.parameters.grace != null ? repo.parameters.grace : "0"}-keep-${repo.parameters.keep != null ? repo.parameters.keep : "0"}-tag_filter-${repo.parameters.tag_filter != null ? repo.parameters.tag_filter : "no"}-tag_filter_any-${repo.parameters.tag_filter_any != null ? repo.parameters.tag_filter_any : "no"}-tag_filter_any-${repo.parameters.tag_filter_any != null ? repo.parameters.tag_filter_any : "no"}" : "delete-all-untagged-images-recursive"
     } if repo.clean_all == true
@@ -51,20 +66,4 @@ locals {
 
   # create final repositories list
   fetched_repositories = concat(local.project_all_repositories, local.repositories)
-
-  # group repositories by project
-  repositories_by_project = {
-    for repo in var.gcr_repositories : repo.project_id != null ? repo.project_id : local.google_project_id => repo...
-  }
-
-  # create a list of tuple { project_id, storage_region } from repositories_by_project
-  # that will be used in `iam.tf`
-  project_storage_region = flatten([
-    for key, repos in local.repositories_by_project : [
-      for repo in repos : {
-        project_id     = key
-        storage_region = repo.storage_region != null ? repo.storage_region : ""
-      }
-    ]
-  ])
 }
