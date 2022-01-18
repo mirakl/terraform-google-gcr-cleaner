@@ -1,12 +1,21 @@
 # Grant cleaner service account access to delete references in Google Container Registry
+# for buckets with uniform_bucket_level_access = false
 resource "google_storage_bucket_access_control" "this" {
-  for_each = {
-    for item in toset(local.project_storage_region) : "${item.storage_region}.${item.project_id}" => item
-  }
+  for_each = toset(local.google_storage_bucket_access_control)
 
-  bucket = each.value.storage_region != "" ? "${each.value.storage_region}.artifacts.${each.value.project_id}.appspot.com" : "artifacts.${each.value.project_id}.appspot.com"
+  bucket = each.value
   role   = "WRITER"
   entity = "user-${google_service_account.cleaner.email}"
+}
+
+# Grant cleaner service account access to delete references in Google Container Registry
+# for buckets with uniform_bucket_level_access = true
+resource "google_storage_bucket_iam_member" "this" {
+  for_each = toset(local.google_storage_bucket_iam_member)
+
+  bucket = each.value
+  role   = "roles/storage.legacyBucketWriter"
+  member = "serviceAccount:${google_service_account.cleaner.email}"
 }
 
 # Add IAM policy binding to the Cloud Run service
