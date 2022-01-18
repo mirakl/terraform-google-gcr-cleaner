@@ -62,7 +62,7 @@ variable "gcr_repositories" {
 List of Google Container Registries objects to create:
 ```
 list(object({
-    project_id     = Value of the Google project id, if ommited, it will be assigned `google_project_id` variable value (optional(string))
+    project_id     = Value of the Google project id, if ommited, it will be assigned `google_project_id` local value, which is the provider's project_id (optional(string))
     storage_region = Location of the storage bucket (optional(string))
     repositories = Docker image repositories to clean (optional(list(object({
       name           = Name of the repository (string)
