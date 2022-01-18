@@ -2,20 +2,21 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/google" {
-  version     = "3.88.0"
-  constraints = ">= 3.88.0"
+  version     = "4.6.0"
+  constraints = ">= 4.1.0"
   hashes = [
-    "h1:c37uef76Ge70Objp/t1/nQ5olRrjR/tkflw4QkAdKlU=",
-    "zh:0b1969ded756e0c01b1909e041ff42c6876205b366a6f4b42c59aeed4cf0c6e1",
-    "zh:0e4ba99f2b024c9080a8f6d5ce6053ac7b61801781a40f1682530f84caa73e8d",
-    "zh:4ea2bedb65be348bfbef7dca87a5d70edf5c2bb0739abce1c6f25077e52bf9d0",
-    "zh:4f905d8a84e4a79ff9fa2c9aa9b7cac249c855f1abb179d7e890c4b60899f641",
-    "zh:57c9c9118b13faf4c7c55e180a1b8a163dd57c7610a9a3d6a99994cc3c3f4af3",
-    "zh:6bc0f989abbfa7d97855d2a4cff06952930c930218782750f6bc7e3593b53b65",
-    "zh:7e28e4db318dbc65934d712c4becffb4bbb80e6488286cf61d5b3e957d19b7e1",
-    "zh:84300a031ba97b7bba2e4aeb675d789b874fdeb9823fa2652e51d3b994d73444",
-    "zh:bca381df06c043f3b7e13bff711d2420bdc110b7e7b9557147a6eaf2ba853197",
-    "zh:cfbc9761b0c83a822a1700088be9d4755d090a7969e46508e2cb879076d5091a",
-    "zh:ee3489a870530992909fab868ae4f5aa8271ba09d53744ea255999ffa7adce72",
+    "h1:QbO4yjDrnoSpiYKSHrICNL1ZuWsl5J2rVRFj2kNg7xA=",
+    "h1:uGcZfOySgiqtYDw0eQXgmdzMDZrsuRXhmzNJYxJbgcc=",
+    "zh:005a28a2c79f6b29680b0f57260c69c85d8a992688007b6e5645149bd379951f",
+    "zh:2604d825de72cf99b4899d7880837adeb19d371f48e419666e32c4c3cf6a72e9",
+    "zh:290da4eb18e44469480cf299bebce89f54e4d301f856cdffe2837b498878c7ec",
+    "zh:3e5ba1a55d38fa17533a18fc14a612e781ded76c6309734d3dc0a937be27eec1",
+    "zh:4a85de3cdb33c092d8ccfced3d7302934de0dd4f72bbcebd79d45afe0a0b6f85",
+    "zh:5fb1a79800833ae922aaba594a8b2bc83be1d254052e12e0ce8330ca0d8933d9",
+    "zh:679b9f50c6fe0476e74d37935f7598d46d6e9612f75b26a8ef1ca3c13144d06a",
+    "zh:893216e32378839668c51ef135af1676cd887d63e2edb6625cf9adad7bfa346f",
+    "zh:ad8f2fd19adbe4c10281ba9b3c8d5100877a9c541d3580bbbe9357714aa77619",
+    "zh:bff5d6fd15e98c12ee9ed98b0338761dc4a9ba671a37834926daeabf73c71783",
+    "zh:debdf15fbed8d63e397cd004bf65586bd2b93ce04e47ca51a7c70c1fe9168b87",
   ]
 }
