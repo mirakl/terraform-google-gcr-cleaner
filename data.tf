@@ -6,3 +6,4 @@ data "google_storage_bucket" "bucket" {
 
   name = each.value
 }
+
