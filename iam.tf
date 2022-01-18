@@ -1,5 +1,5 @@
 # Grant cleaner service account access to delete references in Google Container Registry
-# for old-style ACL buckets
+# for buckets with uniform_bucket_level_access = false
 resource "google_storage_bucket_access_control" "this" {
   for_each = toset(local.google_storage_bucket_access_control)
 
