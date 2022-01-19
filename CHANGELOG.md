@@ -10,6 +10,13 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+<a name="v1.1.0"></a>
+## [v1.1.0] - 2022-01-18
+Features:
+- Add support for GCR buckets with uniform_bucket_level_access = true ([#32](https://github.com/mirakl/terraform-gcr-cleaner/issues/32))
+- Introduce new payload parameters ([#29](https://github.com/mirakl/terraform-gcr-cleaner/issues/29))
+
+
 <a name="v1.0.0"></a>
 ## [v1.0.0] - 2021-11-24
 Bug Fixes:
@@ -61,7 +68,8 @@ Features:
 - First Implementation of GCR Cleaner ([#1](https://github.com/mirakl/terraform-gcr-cleaner/issues/1))
 
 
-[Unreleased]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.6.0...v1.0.0
 [v0.6.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/mirakl/terraform-gcr-cleaner/compare/v0.4.0...v0.5.0
