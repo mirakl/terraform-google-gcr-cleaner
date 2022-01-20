@@ -18,4 +18,11 @@ module "gcr_cleaner" {
       ]
     }
   ]
+  gar_repositories = [
+    {
+      name       = "foo"
+      region     = "europe-west1"
+      project_id = "foobar-123"
+    }
+  ]
 }
