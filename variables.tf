@@ -121,6 +121,23 @@ EOF
   }
 }
 
+variable "gar_repositories" {
+  description = "List of Google Artifact Registry objects:"
+  type = list(object({
+    project_id = string
+    region     = string
+    name       = string
+    parameters = optional(object({
+      grace          = optional(string)
+      keep           = optional(string)
+      tag_filter     = optional(string)
+      tag_filter_any = optional(string)
+      tag_filter_all = optional(string)
+    }))
+  }))
+  default = []
+}
+
 variable "cloud_scheduler_job_schedule" {
   description = "Describes the schedule on which the job will be executed."
   type        = string

@@ -66,6 +66,19 @@ locals {
     ] if gcr.repositories != null
   ])
 
+  gar_repositories = flatten([
+    for gar in var.gar_repositories : {
+      repo           = gar.name
+      grace          = gar.parameters.grace != null ? gar.parameters.grace : "0"
+      keep           = gar.parameters.keep != null ? gar.parameters.keep : "0"
+      tag_filter     = gar.parameters.tag_filter != null ? gar.parameters.tag_filter : ""
+      tag_filter_any = gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : ""
+      tag_filter_all = gar.parameters.tag_filter_all != null ? gar.parameters.tag_filter_all : ""
+      recursive      = false
+      filter         = "grace-${gar.parameters.grace != null ? gar.parameters.grace : "0"}-keep-${gar.parameters.keep != null ? gar.parameters.keep : "0"}-tag_filter-${gar.parameters.tag_filter != null ? gar.parameters.tag_filter : "no"}-tag_filter_any-${gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "no"}-tag_filter_all-${gar.parameters.tag_filter_all != null ? gar.parameters.tag_filter_all : "no"}-recursive-false}"
+    }
+  ])
+
   # create final repositories list
-  fetched_repositories = concat(local.project_all_repositories, local.repositories)
+  fetched_repositories = concat(local.project_all_repositories, local.repositories, local.gar_repositories)
 }
