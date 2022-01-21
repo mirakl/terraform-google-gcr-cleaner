@@ -60,7 +60,7 @@ locals {
           tag_filter_all = repo.tag_filter_all != null ? repo.tag_filter_all : ""
           recursive      = repo.recursive != null ? repo.recursive : false
           dry_run        = repo.dry_run != null ? repo.dry_run : false
-          filter         = "grace-${repo.grace != null ? repo.grace : "0"}-keep-${repo.keep != null ? repo.keep : "0"}-tag_filter-${repo.tag_filter != null ? repo.tag_filter : "no"}-tag_filter_any-${repo.tag_filter_any != null ? repo.tag_filter_any : "no"}-tag_filter_all-${repo.tag_filter_all != null ? repo.tag_filter_all : "no"}-recursive-${repo.recursive != null ? repo.recursive : false}${repo.parameters.dry_run != null ? "${repo.parameters.dry_run ? "-dry_run" : ""}" : ""}"
+          filter         = "grace-${repo.grace != null ? repo.grace : "0"}-keep-${repo.keep != null ? repo.keep : "0"}-tag_filter-${repo.tag_filter != null ? repo.tag_filter : "no"}-tag_filter_any-${repo.tag_filter_any != null ? repo.tag_filter_any : "no"}-tag_filter_all-${repo.tag_filter_all != null ? repo.tag_filter_all : "no"}-recursive-${repo.recursive != null ? repo.recursive : false}${repo.dry_run != null ? "${repo.dry_run ? "-dry_run" : ""}" : ""}"
         }
       )
     ] if gcr.repositories != null
