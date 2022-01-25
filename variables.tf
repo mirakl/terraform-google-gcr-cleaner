@@ -72,6 +72,7 @@ list(object({
       tag_filter_any = If specified, any image with at least one tag that matches this given regular expression will be deleted. The image will be deleted even if it has other tags that do not match the given regular expression (optional(string))
       tag_filter_all = If specified, any image where all tags match this given regular expression will be deleted. The image will not be delete if it has other tags that do not match the given regular expression (optional(string))
       recursive      = If set to true, will recursively search all child repositories (optional(bool))
+      dry_run        = If set to true, will not delete anything and outputs what would have been deleted. (optional(bool))
     }))))
     clean_all  = Set to `true` to clean all project's repositories (optional(bool))
     parameters = Map of parameters to apply to all repositories when `clean_all` is set to `true` (optional(object({
@@ -80,6 +81,7 @@ list(object({
       tag_filter     = (Deprecated) If specified, any image where the first tag matches this given regular expression will be deleted. The image will not be deleted if other tags match the regular expression (optional(string))
       tag_filter_any = If specified, any image with at least one tag that matches this given regular expression will be deleted. The image will be deleted even if it has other tags that do not match the given regular expression (optional(string))
       tag_filter_all = If specified, any image where all tags match this given regular expression will be deleted. The image will not be delete if it has other tags that do not match the given regular expression (optional(string))
+      dry_run        = If set to true, will not delete anything and outputs what would have been deleted. (optional(bool))
     })))
 }))
 ```
@@ -96,6 +98,7 @@ EOF
       tag_filter_any = optional(string)
       tag_filter_all = optional(string)
       recursive      = optional(bool)
+      dry_run        = optional(bool)
     })))
     clean_all = optional(bool)
     parameters = optional(object({
@@ -104,6 +107,7 @@ EOF
       tag_filter     = optional(string)
       tag_filter_any = optional(string)
       tag_filter_all = optional(string)
+      dry_run        = optional(bool)
     }))
   }))
   default = []

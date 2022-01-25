@@ -88,6 +88,7 @@ resource "google_cloud_scheduler_job" "this" {
       tag_filter     = each.value.tag_filter,
       tag_filter_any = each.value.tag_filter_any,
       tag_filter_all = each.value.tag_filter_all,
+      dry_run        = tobool(each.value.dry_run),
       recursive      = tobool(each.value.recursive),
     }))
     oidc_token {
