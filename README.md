@@ -96,20 +96,21 @@ module "gcr_cleaner" {
 - [minimal](examples/minimal) - minimal usage of the module (using default values for variables)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.10 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.1.0 |
-| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | >= 4.1.0 |
+| Name                                                                           | Version   |
+| ------------------------------------------------------------------------------ | --------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform)       | >= 1.0.10 |
+| <a name="requirement_google"></a> [google](#requirement_google)                | >= 4.1.0  |
+| <a name="requirement_google-beta"></a> [google-beta](#requirement_google-beta) | >= 4.1.0  |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.6.0 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.7.0 |
+| Name                                                                     | Version |
+| ------------------------------------------------------------------------ | ------- |
+| <a name="provider_google"></a> [google](#provider_google)                | 4.6.0   |
+| <a name="provider_google-beta"></a> [google-beta](#provider_google-beta) | 4.7.0   |
 
 ## Modules
 
@@ -159,9 +160,10 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_app_engine_application_name"></a> [app\_engine\_application\_name](#output\_app\_engine\_application\_name) | The name of the app engine application. |
-| <a name="output_cloud_run_service_id"></a> [cloud\_run\_service\_id](#output\_cloud\_run\_service\_id) | The ID of the cloud run service. |
-| <a name="output_cloud_scheduler_jobs"></a> [cloud\_scheduler\_jobs](#output\_cloud\_scheduler\_jobs) | List of the created scheduler jobs. |
+| Name                                                                                                                 | Description                             |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| <a name="output_app_engine_application_name"></a> [app_engine_application_name](#output_app_engine_application_name) | The name of the app engine application. |
+| <a name="output_cloud_run_service_id"></a> [cloud_run_service_id](#output_cloud_run_service_id)                      | The ID of the cloud run service.        |
+| <a name="output_cloud_scheduler_jobs"></a> [cloud_scheduler_jobs](#output_cloud_scheduler_jobs)                      | List of the created scheduler jobs.     |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
