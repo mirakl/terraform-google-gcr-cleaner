@@ -69,7 +69,7 @@ locals {
   # create gar_repositories list and sets default values for optional fields.
   gar_repositories = [
     for gar in var.gar_repositories : {
-      repo           = "${gar.region}-docker.pkg.dev/${gar.project_id}/${gar.name}"
+      repo           = "${gar.region}-docker.pkg.dev/${gar.project_id != null ? gar.project_id : local.google_project_id}/${gar.name}"
       grace          = gar.parameters != null ? (gar.parameters.grace != null ? gar.parameters.grace : "0") : "0"
       keep           = gar.parameters != null ? (gar.parameters.keep != null ? gar.parameters.keep : "0") : "0"
       tag_filter     = gar.parameters != null ? (gar.parameters.tag_filter != null ? gar.parameters.tag_filter : "") : ""

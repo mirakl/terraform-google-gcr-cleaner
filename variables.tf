@@ -141,7 +141,7 @@ list(object({
 EOF
 
   type = list(object({
-    project_id = string
+    project_id = optional(string)
     region     = string
     name       = string
     parameters = optional(object({
