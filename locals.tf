@@ -76,6 +76,7 @@ locals {
       tag_filter_any = gar.parameters != null ? (gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "") : ""
       tag_filter_all = gar.parameters != null ? (gar.parameters.tag_filter_all != null ? gar.parameters.tag_filter_all : "") : ""
       recursive      = false
+      dry_run        = gar.parameters != null ? (gar.parameters.dry_run != null ? gar.parameters.dry_run : false) : false
       filter         = gar.parameters != null ? "grace-${gar.parameters.grace != null ? gar.parameters.grace : "0"}-keep-${gar.parameters.keep != null ? gar.parameters.keep : "0"}-tag_filter-${gar.parameters.tag_filter != null ? gar.parameters.tag_filter : "no"}-tag_filter_any-${gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "no"}-tag_filter_any-${gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "no"}" : "delete-all-untagged-images-recursive"
     }
   ]
