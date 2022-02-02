@@ -2,6 +2,17 @@
 
 Terraform module that implements [gcr-cleaner](https://github.com/sethvargo/gcr-cleaner), a tool that deletes untagged images in [Google Cloud Container Registry](https://cloud.google.com/container-registry).
 
+![GitHub language count](https://img.shields.io/github/languages/count/mirakl/terraform-google-gcr-cleaner)
+![GitHub contributors](https://img.shields.io/github/contributors/mirakl/terraform-google-gcr-cleaner)
+[![GitHub stars](https://img.shields.io/github/stars/mirakl/terraform-google-gcr-cleaner)](https://github.com/mirakl/terraform-google-gcr-cleaner/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/mirakl/terraform-google-gcr-cleaner)](https://github.com/mirakl/terraform-google-gcr-cleaner/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/mirakl/terraform-google-gcr-cleaner)
+![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/mirakl/terraform-google-gcr-cleaner)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/mirakl/terraform-google-gcr-cleaner)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mirakl/terraform-google-gcr-cleaner)
+[![GitHub license](https://img.shields.io/github/license/mirakl/terraform-google-gcr-cleaner)](https://github.com/mirakl/terraform-google-gcr-cleaner)
+[![Twitter Follow](https://img.shields.io/twitter/follow/Mirakl?style=social)](https://twitter.com/mirakl)
+
 ## Prerequisites
 
 Please install:
