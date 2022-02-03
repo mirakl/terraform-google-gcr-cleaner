@@ -2,40 +2,41 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/google" {
-  version     = "4.6.0"
+  version     = "4.9.0"
   constraints = ">= 4.1.0"
   hashes = [
-    "h1:QbO4yjDrnoSpiYKSHrICNL1ZuWsl5J2rVRFj2kNg7xA=",
-    "h1:uGcZfOySgiqtYDw0eQXgmdzMDZrsuRXhmzNJYxJbgcc=",
-    "zh:005a28a2c79f6b29680b0f57260c69c85d8a992688007b6e5645149bd379951f",
-    "zh:2604d825de72cf99b4899d7880837adeb19d371f48e419666e32c4c3cf6a72e9",
-    "zh:290da4eb18e44469480cf299bebce89f54e4d301f856cdffe2837b498878c7ec",
-    "zh:3e5ba1a55d38fa17533a18fc14a612e781ded76c6309734d3dc0a937be27eec1",
-    "zh:4a85de3cdb33c092d8ccfced3d7302934de0dd4f72bbcebd79d45afe0a0b6f85",
-    "zh:5fb1a79800833ae922aaba594a8b2bc83be1d254052e12e0ce8330ca0d8933d9",
-    "zh:679b9f50c6fe0476e74d37935f7598d46d6e9612f75b26a8ef1ca3c13144d06a",
-    "zh:893216e32378839668c51ef135af1676cd887d63e2edb6625cf9adad7bfa346f",
-    "zh:ad8f2fd19adbe4c10281ba9b3c8d5100877a9c541d3580bbbe9357714aa77619",
-    "zh:bff5d6fd15e98c12ee9ed98b0338761dc4a9ba671a37834926daeabf73c71783",
-    "zh:debdf15fbed8d63e397cd004bf65586bd2b93ce04e47ca51a7c70c1fe9168b87",
+    "h1:7NS3UTI4ItiaxTW5cEWlFMqezqwRgpKzElaHUnO32EA=",
+    "h1:jXDs/S5zmRBl+dNDWIndVy/47ReLDEqOAHPbXOlhEMo=",
+    "zh:10887917815293d6ad26cc3784c766de4dfa2fa6b2c8b994de4f4b7b3bc31653",
+    "zh:343037e5ec514ac02bfacc200acb648861b04ee9024bed5bf72d13583d10783d",
+    "zh:40eaf3e06e44e2278ba64fc161e96b1bd05508f599ce12e1f094a924839d34a6",
+    "zh:5178f1043fa24a38602833aed72db5023f4183833e1fdb78bb1584a05ff53030",
+    "zh:616889b78ee00ee69d749f7848d63246de200f17efeebfaaf28dbe3f49ec6362",
+    "zh:695f6de8659d17f65a3317b9810cdc1c12738648b1b87dcf7eca90ebc019d889",
+    "zh:6e98efe69bff66120cfd0911eea4d20f7b17c62eed909e12098e46efb8f86e5a",
+    "zh:78f6615113f8fd0fb28f7b58102c55db42e7251463650e0410ec2d6f8877141c",
+    "zh:8a2f45c2f7e4c4077b720d6b98d5ee26347e97b6d2ee12489cca14d42fef2f36",
+    "zh:db1a462b72047342d5b35587953a3db30a4af248100e1db9eddc0ebb4b7c9a07",
+    "zh:fa64449c0efa1340077c860003059762e735b4d2a376d9ece90c174ad8d238c0",
   ]
 }
 
 provider "registry.terraform.io/hashicorp/google-beta" {
-  version     = "4.7.0"
+  version     = "4.9.0"
   constraints = ">= 4.1.0"
   hashes = [
-    "h1:XE4VjVUudcX69aU2ff0UKG0Ym/+i2XYHpkGSOgKXM40=",
-    "zh:79c43a65a24db8083e6d07fca7b940a5806483a7bb54f17ab292d6782cf541fd",
-    "zh:7c4f5e4b1036000adc0fbf69a42f78607ad63a1923e1563d48a7ca0cf166e3b8",
-    "zh:7d816b922cc9924e481ade38ad116770e9010286a0324a99f6d5d82af732e651",
-    "zh:830d36990973aa4ef4b6d8772d102802c3cc8de72d9ade92f96b3a0f99ff895a",
-    "zh:847597cb6907bbb1ed868a3103e488c2da744204702d52c9769812a45bd2c0e3",
-    "zh:8ffb246fe6d24ea025930579928ab2d69f0a75e0faa867e1d290b04a7e15b344",
-    "zh:91d903c6ae8a8d02314ea9a603c2ad029600f1740eb46f1acaa5538862168155",
-    "zh:c15ad7287a82446c36bdd526ac85f7f5e4227a1d1f1d0d437ea6d67af2f2de2a",
-    "zh:d2bfa3e2cf06cfe0f4ae3d64215f3044adb1cc716ac69897b808ff726795daa4",
-    "zh:d44e2113e3c8eaadc298d0c9e565546c6d25ac27bf66654a35a9201d9a3dadd6",
-    "zh:f032773e12c386de9312d6ae638836953aa7c97d0b912738fd3ef8b953b0e927",
+    "h1:EJobL0UWcm8g4HHG8UXGz/0czOL9AYGJ41TEm3MSh+g=",
+    "h1:ao49L+hyXa6/m5PllkrNulCs2mm+Gatjn/u1PoBtaac=",
+    "zh:04ea66283cf20dec73d10fada343ac220caa39f8a67790e0f4b6e4e4b75e861a",
+    "zh:1154d28e17e6e4daa0841515b8ad22428f64132457fe30874590259abadf3631",
+    "zh:279a2c3f94fe61e5d82497651fa0cfdfc70e19cb43a68841fef44c28701fcf6f",
+    "zh:355fd8ce3cfd63b1285831469c78bad53866f182684ceb51045c218cc768be8c",
+    "zh:3b97c8cbe37f4053aeba5e7281e656edf28f66ec6e112e23dedac75074a49093",
+    "zh:6893d0df3ffbdac96ecf9b03bfdd7ba87398fcad40d6bd85dc13611cd533419f",
+    "zh:795603e20ac94933bf197e78fd9f1c9dcb5d8e3a9b39498103a50b117dcc502e",
+    "zh:7f99433b88f777a9e8beed8289e2256a89a89cac3539892206c7e935e985b014",
+    "zh:aea9961cf0c466dce6f6e58659850fdc03b181ea69e57846c712d21ce44615d6",
+    "zh:d379db1662d638ddb4acd6d86bfc81c5b2d5785b828421c046b6e19d3cc69908",
+    "zh:f1825dbe66a8b7bd6b8bc07a4fd8722c1152c4821d9cd6a0f402de1984239009",
   ]
 }
