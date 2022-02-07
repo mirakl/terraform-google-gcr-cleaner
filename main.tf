@@ -1,6 +1,7 @@
 # Deploy the gcr-cleaner container on Cloud Run
 # running as gcr-cleaner service account
 resource "google_cloud_run_service" "this" {
+  project  = local.google_project_id
   name     = var.cloud_run_service_name
   location = var.cloud_run_service_location
 
@@ -63,6 +64,7 @@ resource "google_cloud_scheduler_job" "this" {
     for repo in toset(local.fetched_repositories) : replace(replace("${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
   }
 
+  project          = local.google_project_id
   name             = each.key
   description      = "Cleanup ${each.value.repo} using ${each.value.filter} filter"
   schedule         = var.cloud_scheduler_job_schedule

@@ -1,3 +1,9 @@
+variable "project_id" {
+  description = "GCP project that the Cloud Run instances are being created."
+  type        = string
+  default     = ""
+}
+
 variable "disable_dependent_services" {
   description = "If `true`, services that are enabled and which depend on this service should also be disabled when this service is destroyed. If `false` or unset, an error will be generated if any enabled services depend on this service when destroying it."
   type        = bool

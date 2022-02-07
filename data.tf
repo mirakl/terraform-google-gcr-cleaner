@@ -1,5 +1,7 @@
 # get project details
-data "google_project" "this" {}
+data "google_project" "this" {
+  count = var.project_id == "" ? 1 : 0
+}
 
 data "google_storage_bucket" "bucket" {
   for_each = toset(local.buckets)

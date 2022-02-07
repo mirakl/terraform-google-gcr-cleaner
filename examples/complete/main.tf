@@ -4,6 +4,7 @@ module "gcr_cleaner" {
   # If you want to create your App Engine Application using terraform, uncomment the following
   # create_app_engine_app = true
 
+  project_id                               = "barbaz-x9f2"
   app_engine_application_location          = "europe-west3"
   cloud_run_service_name                   = "gcr-cleaner-helsinki"
   cloud_run_service_location               = "europe-north1"
