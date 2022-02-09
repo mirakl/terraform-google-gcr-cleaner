@@ -6,3 +6,5 @@ data "google_storage_bucket" "bucket" {
 
   name = each.value
 }
+
+data "google_client_openid_userinfo" "terraform" {}
