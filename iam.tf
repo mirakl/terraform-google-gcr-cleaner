@@ -55,7 +55,7 @@ resource "google_artifact_registry_repository_iam_member" "this" {
 
 # Allow the account that is running terraform permissions to act-as
 # the service-account, required for deploying a CloudRun service
-resource "google_service_account_iam_member" "tf_cleaner" {
+resource "google_service_account_iam_member" "tf_as_cleaner" {
   count = local.running_as_a_service_account ? 1 : 0
 
   service_account_id = google_service_account.cleaner.name
@@ -65,7 +65,7 @@ resource "google_service_account_iam_member" "tf_cleaner" {
 
 # Allow the account that is running terraform permissions to act-as
 # the service-account, required for deploying a CloudScheduler service
-resource "google_service_account_iam_member" "tf_invoker" {
+resource "google_service_account_iam_member" "tf_as_invoker" {
   count = local.running_as_a_service_account ? 1 : 0
 
   service_account_id = google_service_account.invoker.name
