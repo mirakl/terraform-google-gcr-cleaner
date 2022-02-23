@@ -11,6 +11,20 @@ jobs:
   main:
     name: Validate PR title
     runs-on: ubuntu-latest
+    permissions:
+      actions: none
+      checks: none
+      contents: write
+      deployments: none
+      id-token: none
+      issues: none
+      packages: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+
     steps:
       # Please look up the latest version from
       # https://github.com/amannn/action-semantic-pull-request/releases
