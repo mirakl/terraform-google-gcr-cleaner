@@ -8,6 +8,19 @@ on:
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      actions: none
+      checks: none
+      contents: write
+      deployments: none
+      id-token: none
+      issues: none
+      packages: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
     steps:
       - name: "Close Stale Issues & PRs 🔇"
         uses: actions/stale@v4
