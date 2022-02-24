@@ -25,9 +25,8 @@ jobs:
       security-events: none
       statuses: none
     steps:
-      # Please look up the latest version from
-      # https://github.com/amannn/action-semantic-pull-request/releases
-      - uses: amannn/action-semantic-pull-request@v3.6.0
+      # Tag v4.2.0 https://github.com/amannn/action-semantic-pull-request/commit/0eb081bc9c35210408951834a444794406eff6f8
+      - uses: amannn/action-semantic-pull-request@ad47c64a77f00b53fe0a6b41d9a65f14c2e0b5fd
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
