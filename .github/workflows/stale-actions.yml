@@ -17,7 +17,7 @@ jobs:
       issues: write
       packages: none
       pages: none
-      pull-requests: none
+      pull-requests: write
       repository-projects: none
       security-events: none
       statuses: none
