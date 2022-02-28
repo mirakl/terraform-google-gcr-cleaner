@@ -8,8 +8,22 @@ on:
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      actions: none
+      checks: none
+      contents: none
+      deployments: none
+      id-token: none
+      issues: write
+      packages: none
+      pages: none
+      pull-requests: write
+      repository-projects: none
+      security-events: none
+      statuses: none
     steps:
       - name: "Close Stale Issues & PRs 🔇"
+        # This Github Action [https://github.com/marketplace/actions/close-stale-issues] is verified by GitHub and has the label "Verified creator". That's why we are using the final tag directly.
         uses: actions/stale@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
