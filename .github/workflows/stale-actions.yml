@@ -23,7 +23,7 @@ jobs:
       statuses: none
     steps:
       - name: "Close Stale Issues & PRs 🔇"
-        # Github Action as the label "Verified creator" https://github.com/marketplace/actions/close-stale-issues
+        # This Github Action [https://github.com/marketplace/actions/close-stale-issues] is verified by GitHub and has the label "Verified creator". That's why we are using the final tag directly.
         uses: actions/stale@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
