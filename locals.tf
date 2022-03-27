@@ -1,5 +1,5 @@
 locals {
-  # get project id (used by google provider)
+  # get project id: either from project_id variable or from google provider.
   google_project_id = var.project_id != "" ? var.project_id : split("/", data.google_project.this[0].id)[1]
 
   google_apis = [

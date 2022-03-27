@@ -1,5 +1,5 @@
 variable "project_id" {
-  description = "GCP project that the Cloud Run instances are being created."
+  description = "The ID of the project to which the resource belongs. If it is not provided, the provider project is used."
   type        = string
   default     = ""
 }
