@@ -63,8 +63,8 @@ resource "google_cloud_scheduler_job" "this" {
     for repo in toset(local.fetched_repositories) : replace(replace("${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
   }
 
-  name             = each.key
-  description      = "Cleanup ${each.value.repo} using ${each.value.filter} filter"
+  name             = each.value.scheduler_job_name != null ? each.value.scheduler_job_name : each.key
+  description      = each.value.scheduler_job_description != null ? each.value.scheduler_job_description : "Cleanup ${each.value.repo} using ${each.value.filter} filter"
   schedule         = var.cloud_scheduler_job_schedule
   time_zone        = var.cloud_scheduler_job_time_zone
   attempt_deadline = "${var.cloud_scheduler_job_attempt_deadline}s"
