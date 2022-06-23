@@ -48,9 +48,13 @@ module "gcr_cleaner" {
       ]
     },
     {
-      # in all repositories, delete all untagged images
+      # in all repositories, delete all untagged images, using a custom Cloud Scheduler job name and description
       clean_all      = true
       storage_region = "eu"
+      parameters = {
+        scheduler_job_name        = "cleanup-untagged-gcr-images"
+        scheduler_job_description = "Delete all untagged GCR images from all repositories"
+      }
     },
     {
       # in all repositories, keep 5 `beta` tags, ignore anything newer than 5 days
