@@ -14,32 +14,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Python environment
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v2
       - name: Setup Terraform Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          key: ${{ runner.os }}-${{ hashFiles('**/.terraform.lock.hcl') }}
+          key: ${{ runner.os }}-terraform-${{ hashFiles('.terraform.lock.hcl') }}
           path: ${{ env.TF_PLUGIN_CACHE_DIR }}
       - name: Setup Go environment
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: 1.17
-      - name: "Install pre-commit tools: terraform-docs, tflint & tfsec"
+          go-version: 1.18
+      - name: "Install pre-commit tools: terraform-docs & tfsec"
         run: |
           mkdir -p $TF_PLUGIN_CACHE_DIR
           go install github.com/terraform-docs/terraform-docs@latest
           sudo mv $(go env GOPATH)/bin/terraform-docs /usr/local/bin/terraform-docs
-          curl -sSLf "$(curl -sS https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" > tflint.zip
-          unzip tflint.zip && rm tflint.zip
-          sudo mv tflint /usr/local/bin/
           go install github.com/aquasecurity/tfsec/cmd/tfsec@latest
           sudo mv $(go env GOPATH)/bin/tfsec /usr/local/bin/tfsec
-      - uses: hashicorp/setup-terraform@v1
+          go install golang.org/x/tools/cmd/goimports@latest
+          sudo mv $(go env GOPATH)/bin/goimports /usr/local/bin/goimports
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.0.10
+          terraform_version: 1.1.8
+          terraform_wrapper: false
       - name: Run pre-commit hooks
-        uses: pre-commit/action@v2.0.0
-        env:
-          GO111MODULE: auto
+        uses: pre-commit/action@v2.0.3
