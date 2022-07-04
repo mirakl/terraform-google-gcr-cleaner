@@ -20,6 +20,9 @@ and [Google Cloud Artifact Registry](https://cloud.google.com/artifact-registry)
   - in `test/python` repository, delete all images older than 30 days (720h)
 - From `another-project-id` project
   - in `test/os/centos` repository, delete all untagged images
+- From project `foobar-123`
+  - in `foo/nginx` docker repository in Google Artifact Registry `foo`, delete all untagged images
+  - in `foo/python` docker repository in Google Artifact Registry `foo`, delete all untagged images
 
 ```hcl
 module "gcr_cleaner" {
@@ -54,9 +57,16 @@ module "gcr_cleaner" {
   ]
   gar_repositories = [
     {
-      name       = "foo"
-      region     = "europe-west1"
-      project_id = "foobar-123"
+      name          = "foo/nginx"
+      registry_name = "foo"
+      region        = "europe-west1"
+      project_id    = "foobar-123"
+    },
+    {
+      name          = "foo/python"
+      registry_name = "foo"
+      region        = "europe-west1"
+      project_id    = "foobar-123"
     }
   ]
 }

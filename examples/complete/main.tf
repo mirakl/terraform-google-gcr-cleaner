@@ -69,13 +69,25 @@ module "gcr_cleaner" {
   ]
   gar_repositories = [
     {
-      project_id = "foobar-123"
-      region     = "europe-west1"
-      name       = "myrepo"
-      parameters = {
-        grace      = "180h"
-        keep       = 3
-        tag_filter = "^alpha.+$"
+      project_id    = "foobar-123"
+      region        = "europe-west1"
+      name          = "myrepo/nginx"
+      registry_name = "myrepo"
+      parameters    = {
+        grace       = "180h"
+        keep        = 3
+        tag_filter  = "^alpha.+$"
+      }
+    },
+    {
+      project_id    = "foobar-123"
+      region        = "europe-west1"
+      name          = "myrepo/python"
+      registry_name = "myrepo"
+      parameters    = {
+        grace       = "24h"
+        keep        = 2
+        tag_filter  = "^beta.+$"
       }
     }
   ]
