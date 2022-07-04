@@ -136,7 +136,8 @@ List of Google Artifact Registry objects:
 list(object({
     project_id = Value of the Google project id, if ommited, it will be assigned `google_project_id` local value, which is the provider's project_id (string)
     region     = Location of the storage bucket (string)
-    name       = Name of the Artifact Registry repository (string)
+    name       = Name of the Artifact Registry with the full repository path (string)
+    registry_name = Name of the Artifact Registry Docker Registry (string)
     parameters = Map of parameters to apply to all repositories when `clean_all` is set to `true` (optional(object({
         grace          = Relative duration in which to ignore references. This value is specified as a time duration value like "5s" or "3h". If set, refs newer than the duration will not be deleted. If unspecified, the default is no grace period (all untagged image refs are deleted) (optional(string))
         keep           = If an integer is provided, it will always keep that minimum number of images. Note that it will not consider images inside the `grace` duration (optional(string))
@@ -155,6 +156,7 @@ EOF
     project_id = optional(string)
     region     = string
     name       = string
+    registry_name = string
     parameters = optional(object({
       grace                     = optional(string)
       keep                      = optional(string)
