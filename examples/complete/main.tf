@@ -73,10 +73,10 @@ module "gcr_cleaner" {
       region        = "europe-west1"
       name          = "myrepo/nginx"
       registry_name = "myrepo"
-      parameters    = {
-        grace       = "180h"
-        keep        = 3
-        tag_filter  = "^alpha.+$"
+      parameters = {
+        grace      = "180h"
+        keep       = 3
+        tag_filter = "^alpha.+$"
       }
     },
     {
@@ -84,10 +84,10 @@ module "gcr_cleaner" {
       region        = "europe-west1"
       name          = "myrepo/python"
       registry_name = "myrepo"
-      parameters    = {
-        grace       = "24h"
-        keep        = 2
-        tag_filter  = "^beta.+$"
+      parameters = {
+        grace      = "24h"
+        keep       = 2
+        tag_filter = "^beta.+$"
       }
     }
   ]
