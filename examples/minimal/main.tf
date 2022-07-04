@@ -20,9 +20,16 @@ module "gcr_cleaner" {
   ]
   gar_repositories = [
     {
-      name       = "foo"
-      region     = "europe-west1"
-      project_id = "foobar-123"
+      name          = "foo/nginx"
+      registry_name = "foo"
+      region        = "europe-west1"
+      project_id    = "foobar-123"
+    },
+    {
+      name          = "foo/python"
+      registry_name = "foo"
+      region        = "europe-west1"
+      project_id    = "foobar-123"
     }
   ]
 }

@@ -74,14 +74,15 @@ locals {
   gar_repositories = [
     for gar in var.gar_repositories : {
       repo                      = "${gar.region}-docker.pkg.dev/${gar.project_id != null ? gar.project_id : local.google_project_id}/${gar.name}"
+      registry_name             = "${gar.region}-docker.pkg.dev/${gar.project_id != null ? gar.project_id : local.google_project_id}/${gar.registry_name}"
       grace                     = gar.parameters != null ? (gar.parameters.grace != null ? gar.parameters.grace : "0") : "0"
       keep                      = gar.parameters != null ? (gar.parameters.keep != null ? gar.parameters.keep : "0") : "0"
       tag_filter                = gar.parameters != null ? (gar.parameters.tag_filter != null ? gar.parameters.tag_filter : "") : ""
       tag_filter_any            = gar.parameters != null ? (gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "") : ""
       tag_filter_all            = gar.parameters != null ? (gar.parameters.tag_filter_all != null ? gar.parameters.tag_filter_all : "") : ""
-      recursive                 = false
+      recursive                 = gar.parameters != null ? (gar.parameters.recursive != null ? gar.parameters.recursive : false) : false
       dry_run                   = gar.parameters != null ? (gar.parameters.dry_run != null ? gar.parameters.dry_run : false) : false
-      filter                    = gar.parameters != null ? "grace-${gar.parameters.grace != null ? gar.parameters.grace : "0"}-keep-${gar.parameters.keep != null ? gar.parameters.keep : "0"}-tag_filter-${gar.parameters.tag_filter != null ? gar.parameters.tag_filter : "no"}-tag_filter_any-${gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "no"}-tag_filter_all-${gar.parameters.tag_filter_all != null ? gar.parameters.tag_filter_all : "no"}" : "delete-all-untagged-images-recursive"
+      filter                    = gar.parameters != null ? "grace-${gar.parameters.grace != null ? gar.parameters.grace : "0"}-keep-${gar.parameters.keep != null ? gar.parameters.keep : "0"}-tag_filter-${gar.parameters.tag_filter != null ? gar.parameters.tag_filter : "no"}-tag_filter_any-${gar.parameters.tag_filter_any != null ? gar.parameters.tag_filter_any : "no"}-tag_filter_all-${gar.parameters.tag_filter_all != null ? gar.parameters.tag_filter_all : "no"}-recursive-${gar.parameters.recursive != null ? gar.parameters.recursive : false}" : "delete-all-untagged-images-recursive"
       scheduler_job_name        = gar.parameters != null ? gar.parameters.scheduler_job_name : null
       scheduler_job_description = gar.parameters != null ? gar.parameters.scheduler_job_description : null
     }
