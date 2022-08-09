@@ -6,9 +6,6 @@
       "release-type": "terraform-module",
       "draft": false,
       "prerelease": false,
-      "bumpMinorPreMajor": false,
-      "bumpPatchForMinorPreMajor": false,
-      "changelogPath": "CHANGELOG.md",
       "versioning": "default"
     }
   }
