@@ -1,0 +1,12 @@
+{
+  "bootstrap-sha": "6c543a5930c519c3fac807377b400ef423a6d312",
+  "release-type": "terraform-module",
+  "packages": {
+    ".": {
+      "release-type": "terraform-module",
+      "draft": false,
+      "prerelease": false,
+      "versioning": "default"
+    }
+  }
+}

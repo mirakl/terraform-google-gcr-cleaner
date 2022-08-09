@@ -30,18 +30,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # Configure which types are allowed.
-          # Default: https://github.com/commitizen/conventional-commit-types
-          types: |
-            Feature
-            Fix
-            Enhancement
-            Perf
-            Docs
-            Refactor
-            Test
-            CI
-            chore
           # Configure that a scope must always be provided.
           requireScope: false
           # Configure additional validation for the subject based on a regex.
