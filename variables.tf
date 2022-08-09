@@ -136,13 +136,15 @@ List of Google Artifact Registry objects:
 list(object({
     project_id = Value of the Google project id, if ommited, it will be assigned `google_project_id` local value, which is the provider's project_id (string)
     region     = Location of the storage bucket (string)
-    name       = Name of the Artifact Registry repository (string)
+    name       = Name of the Artifact Registry with the full repository path (string)
+    registry_name = Name of the Artifact Registry Docker Registry (string)
     parameters = Map of parameters to apply to all repositories when `clean_all` is set to `true` (optional(object({
         grace          = Relative duration in which to ignore references. This value is specified as a time duration value like "5s" or "3h". If set, refs newer than the duration will not be deleted. If unspecified, the default is no grace period (all untagged image refs are deleted) (optional(string))
         keep           = If an integer is provided, it will always keep that minimum number of images. Note that it will not consider images inside the `grace` duration (optional(string))
         tag_filter     = (Deprecated) If specified, any image where the first tag matches this given regular expression will be deleted. The image will not be deleted if other tags match the regular expression (optional(string))
         tag_filter_any = If specified, any image with at least one tag that matches this given regular expression will be deleted. The image will be deleted even if it has other tags that do not match the given regular expression (optional(string))
         tag_filter_all = If specified, any image where all tags match this given regular expression will be deleted. The image will not be delete if it has other tags that do not match the given regular expression (optional(string))
+        recursive      = If set to true, will recursively search all child repositories (optional(bool))
         dry_run        = If set to true, will not delete anything and outputs what would have been deleted. (optional(bool))
         scheduler_job_name        = If specified, uses this as name for the Cloud Scheduler job. (optional(string))
         scheduler_job_description = If specified, uses this as description for the Cloud Scheduler job. (optional(string))
@@ -152,9 +154,10 @@ list(object({
 EOF
 
   type = list(object({
-    project_id = optional(string)
-    region     = string
-    name       = string
+    project_id    = optional(string)
+    region        = string
+    name          = string
+    registry_name = string
     parameters = optional(object({
       grace                     = optional(string)
       keep                      = optional(string)
@@ -162,6 +165,7 @@ EOF
       tag_filter_any            = optional(string)
       tag_filter_all            = optional(string)
       dry_run                   = optional(bool)
+      recursive                 = optional(bool)
       scheduler_job_name        = optional(string)
       scheduler_job_description = optional(string)
     }))
