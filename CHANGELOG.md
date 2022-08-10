@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="unreleased"></a>
+## [1.4.0](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v1.3.0...v1.4.0) (2022-08-10)
+
+
+### Features
+
+* Set different rules per docker image in a Artifact Registry docker repository ([#53](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/53)) ([75cc8dd](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/75cc8dd9c59f272ac4f37e50c61a6423aaed14fc))
+
+
+### Bug Fixes
+
+* Adding repos parameter to payload ([#27](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/27)) ([0b62c57](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/0b62c57161feec5fee91b0d38b75fd47fb9873f7))
+
 ## [Unreleased]
 
 
