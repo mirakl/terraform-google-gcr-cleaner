@@ -48,9 +48,13 @@ module "gcr_cleaner" {
       ]
     },
     {
-      # in all repositories, delete all untagged images
+      # in all repositories, delete all untagged images, using a custom Cloud Scheduler job name and description
       clean_all      = true
       storage_region = "eu"
+      parameters = {
+        scheduler_job_name        = "cleanup-untagged-gcr-images"
+        scheduler_job_description = "Delete all untagged GCR images from all repositories"
+      }
     },
     {
       # in all repositories, keep 5 `beta` tags, ignore anything newer than 5 days
@@ -65,13 +69,25 @@ module "gcr_cleaner" {
   ]
   gar_repositories = [
     {
-      project_id = "foobar-123"
-      region     = "europe-west1"
-      name       = "myrepo"
+      project_id    = "foobar-123"
+      region        = "europe-west1"
+      name          = "myrepo/nginx"
+      registry_name = "myrepo"
       parameters = {
         grace      = "180h"
         keep       = 3
         tag_filter = "^alpha.+$"
+      }
+    },
+    {
+      project_id    = "foobar-123"
+      region        = "europe-west1"
+      name          = "myrepo/python"
+      registry_name = "myrepo"
+      parameters = {
+        grace      = "24h"
+        keep       = 2
+        tag_filter = "^beta.+$"
       }
     }
   ]
