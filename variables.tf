@@ -49,11 +49,10 @@ variable "app_engine_application_location" {
 variable "gcr_cleaner_image" {
   description = "The docker image of the gcr cleaner to deploy to Cloud Run."
   type        = string
-  # Using latest because of https://github.com/GoogleCloudPlatform/gcr-cleaner/issues/52
   default = "gcr.io/gcr-cleaner/gcr-cleaner:latest"
   validation {
-    condition     = can(regex("^((asia|europe|us)-docker\\.pkg\\.dev\\/gcr-cleaner\\/gcr-cleaner\\/gcr-cleaner:latest|gcr\\.io\\/gcr-cleaner\\/gcr-cleaner:latest)$", var.gcr_cleaner_image))
-    error_message = "The gcr cleaner image must be one of `gcr.io/gcr-cleaner/gcr-cleaner:latest`, `asia-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest`, `europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest`, or `us-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner:latest`."
+    condition     = can(regex("^((asia|europe|us)-docker\\.pkg\\.dev\\/gcr-cleaner\\/gcr-cleaner\\/gcr-cleaner|gcr\\.io\\/gcr-cleaner\\/gcr-cleaner):(latest|[0-9]+\\.[0-9]+\\.[0-9]+)$", var.gcr_cleaner_image))
+    error_message = "The gcr cleaner image must be one of `gcr.io/gcr-cleaner/gcr-cleaner`, `asia-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner`, `europe-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner`, or `us-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner`."
   }
 }
 
