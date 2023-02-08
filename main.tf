@@ -60,7 +60,7 @@ resource "google_cloud_scheduler_job" "this" {
     # and be no more than 500 characters.
     # First replace all special characters with '-',
     # then replace any at least 2 consecutive `-` characters with one '-'.
-    for repo in toset(local.fetched_repositories) : replace(replace("${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
+    for repo in toset(local.fetched_repositories) : replace(replace(repo.scheduler_job_name != null ? repo.scheduler_job_name : "${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
   }
 
   name             = each.value.scheduler_job_name != null ? each.value.scheduler_job_name : each.key
