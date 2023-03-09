@@ -56,11 +56,13 @@ resource "google_app_engine_application" "this" {
 # 2. Cloud Scheduler job that triggers an action via HTTP
 resource "google_cloud_scheduler_job" "this" {
   for_each = {
+    # The key is the `schedule_job_name` if exist otherwise it's a concatenation
+    # of the filter and repo.
     # name must match the RE2 regular expression "[a-zA-Z\d_-]{1,500}"
     # and be no more than 500 characters.
     # First replace all special characters with '-',
     # then replace any at least 2 consecutive `-` characters with one '-'.
-    for repo in toset(local.fetched_repositories) : replace(replace("${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
+    for repo in toset(local.fetched_repositories) : replace(replace(repo.scheduler_job_name != null ? repo.scheduler_job_name : "${repo.filter}:${repo.repo}", "/[\\W+:/]/", "-"), "/-{2,}/", "-") => repo
   }
 
   name             = each.value.scheduler_job_name != null ? each.value.scheduler_job_name : each.key
