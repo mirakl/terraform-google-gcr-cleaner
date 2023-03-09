@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="unreleased"></a>
+## [3.0.0](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v2.0.0...v3.0.0) (2023-03-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* If scheduler name is set use it as name of the job resource ([#69](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/69))
+
+### Features
+
+* Allow setting full version of gcr cleaner ([#68](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/68)) ([ace8dc2](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/ace8dc2d172f68801f80c4b80e70f151789f6333))
+* If scheduler name is set use it as name of the job resource ([#69](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/69)) ([efe22ce](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/efe22ce56e0aba4cb1b010106098539a22e8c1f5))
+
 ## [2.0.0](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v1.4.1...v2.0.0) (2022-09-23)
 
 
