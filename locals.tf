@@ -95,7 +95,7 @@ locals {
 
   gcr_cleaner_env = [
     {
-      name = "GCRCLEANER_LOG"
+      name  = "GCRCLEANER_LOG"
       value = var.gcr_cleaner_log_level
     }
   ]
