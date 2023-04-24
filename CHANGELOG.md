@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="unreleased"></a>
+## [3.0.1](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v3.0.0...v3.0.1) (2023-04-24)
+
+
+### Features
+
+* Add support of `GCRCLEANER_LOG` ([#71](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/71)) ([0531dc9](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/0531dc9d94cb510010648b8e92e258fac212bc3d))
+
 ## [3.0.0](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v2.0.0...v3.0.0) (2023-03-09)
 
 
