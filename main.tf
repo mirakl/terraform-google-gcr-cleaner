@@ -15,6 +15,14 @@ resource "google_cloud_run_service" "this" {
     spec {
       containers {
         image = var.gcr_cleaner_image
+
+        dynamic "env" {
+          for_each = local.gcr_cleaner_env
+          content {
+            name  = env.value.name
+            value = env.value.value
+          }
+        }
       }
       service_account_name = google_service_account.cleaner.email
       timeout_seconds      = var.cloud_run_service_timeout_seconds

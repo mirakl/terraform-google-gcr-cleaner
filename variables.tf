@@ -172,6 +172,12 @@ EOF
   default = []
 }
 
+variable "gcr_cleaner_log_level" {
+  description = "By default, GCR Cleaner only emits user-level logging at the \"info\" level. More logs are available at the \"debug\" level. More at https://github.com/GoogleCloudPlatform/gcr-cleaner#debugging."
+  type        = string
+  default     = "info"
+}
+
 variable "cloud_scheduler_job_schedule" {
   description = "Describes the schedule on which the job will be executed."
   type        = string
