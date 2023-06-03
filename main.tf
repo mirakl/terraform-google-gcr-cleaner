@@ -4,6 +4,12 @@ resource "google_cloud_run_service" "this" {
   name     = var.cloud_run_service_name
   location = var.cloud_run_service_location
 
+  metadata {
+    annotations = {
+      "run.googleapis.com/ingress"       = "internal"
+    }
+  }
+
   template {
     metadata {
       annotations = {
