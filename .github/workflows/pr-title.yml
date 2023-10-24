@@ -25,8 +25,8 @@ jobs:
       security-events: none
       statuses: write
     steps:
-      # Tag v4.5.0 https://github.com/amannn/action-semantic-pull-request/commit/91682d013dea3ff257520b9b68c9cb93ced4fe9b
-      - uses: amannn/action-semantic-pull-request@91682d013dea3ff257520b9b68c9cb93ced4fe9b
+      # Tag v5.3.0 https://github.com/amannn/action-semantic-pull-request/commit/47b15d52c5c30e94a17ec87eb8dd51ff5221fed9
+      - uses: amannn/action-semantic-pull-request@47b15d52c5c30e94a17ec87eb8dd51ff5221fed9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
