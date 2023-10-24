@@ -18,7 +18,7 @@ jobs:
       - name: Setup Python environment
         uses: actions/setup-python@v3
       - name: Setup TFLint
-        uses: terraform-linters/setup-tflint@v2
+        uses: terraform-linters/setup-tflint@v4
       - name: Setup Terraform Cache
         uses: actions/cache@v3
         with:
