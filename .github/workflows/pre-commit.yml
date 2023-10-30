@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-terraform-${{ hashFiles('.terraform.lock.hcl') }}
           path: ${{ env.TF_PLUGIN_CACHE_DIR }}
       - name: Setup Go environment
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
           go-version: 1.18
       - name: "Install pre-commit tools: terraform-docs & tfsec"
