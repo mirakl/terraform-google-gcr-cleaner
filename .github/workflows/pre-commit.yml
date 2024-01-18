@@ -16,7 +16,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Setup Python environment
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
       - name: Setup Terraform Cache
