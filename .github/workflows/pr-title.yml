@@ -11,6 +11,7 @@ jobs:
   main:
     name: Validate PR title
     runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' 
     permissions:
       actions: none
       checks: none

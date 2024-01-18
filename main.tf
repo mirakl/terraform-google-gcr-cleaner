@@ -10,7 +10,7 @@ resource "google_cloud_run_service" "this" {
         "autoscaling.knative.dev/maxScale" = var.cloud_run_service_maximum_instances
         "run.googleapis.com/client-name"   = "cloud-scheduler"
       }
-      
+
       labels = {
         "run.googleapis.com/startupProbeType" = "Default"
       }
