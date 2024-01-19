@@ -38,7 +38,7 @@ jobs:
           go install golang.org/x/tools/cmd/goimports@latest
           sudo mv $(go env GOPATH)/bin/goimports /usr/local/bin/goimports
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.3.0
           terraform_wrapper: false
