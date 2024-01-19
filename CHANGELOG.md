@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="unreleased"></a>
+## [3.0.2](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v3.0.1...v3.0.2) (2024-01-19)
+
+
+### Bug Fixes
+
+* **ci:** Don't validate pr title for dependabot pr ([#91](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/91)) ([51f0bb8](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/51f0bb85202fea66c3531c7a3afc9804b6d97067))
+* **idempotency:** label changed on each plan ([#75](https://github.com/mirakl/terraform-google-gcr-cleaner/issues/75)) ([0101278](https://github.com/mirakl/terraform-google-gcr-cleaner/commit/0101278b0a637d87cdcc07cee7a39338d17dd406))
+
 ## [3.0.1](https://github.com/mirakl/terraform-google-gcr-cleaner/compare/v3.0.0...v3.0.1) (2023-04-24)
 
 
