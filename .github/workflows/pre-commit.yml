@@ -20,7 +20,7 @@ jobs:
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
       - name: Setup Terraform Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-terraform-${{ hashFiles('.terraform.lock.hcl') }}
           path: ${{ env.TF_PLUGIN_CACHE_DIR }}
