@@ -1,5 +1,9 @@
 # terraform-google-gcr-cleaner
 
+> [!CAUTION]
+>
+> The functionality provied by the tool deployed with this terraform module is [now built directly into Artifact Registry](https://cloud.google.com/artifact-registry/docs/repositories/cleanup-policy)! **We are no longer accepting bug reports or feature requests.** and this repository is now archived.
+
 Terraform module that implements [gcr-cleaner](https://github.com/sethvargo/gcr-cleaner), a tool that deletes untagged images in [Google Cloud Container Registry](https://cloud.google.com/container-registry)
 and [Google Cloud Artifact Registry](https://cloud.google.com/artifact-registry).
 
